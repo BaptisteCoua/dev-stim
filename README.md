@@ -23,5 +23,15 @@ docker compose up
 
 ```
 
+## Database
+
+Start migration :
+
+```bash
+
+npx drizzle-kit push
+
+```
+
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
