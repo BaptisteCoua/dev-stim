@@ -10,7 +10,23 @@ services:
       - .:/app
       - /app/node_modules
       - /app/.nuxt
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+
+  postgres:
+    image: postgres:18-alpine
+    container_name: postgres-db
+    restart: always
     environment:
-      NODE_ENV: development
-      NUXT_HOST: 0.0.0.0
-      NUXT_PORT: 3000
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: app
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
