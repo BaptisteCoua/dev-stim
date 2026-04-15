@@ -20,6 +20,7 @@
   "devDependencies": {
     "@types/pg": "^8.20.0",
     "drizzle-kit": "^0.31.10",
-    "nuxt": "^4.4.2"
+    "nuxt": "^4.4.2",
+    "tsx": "^4.21.0"
   }
 }
