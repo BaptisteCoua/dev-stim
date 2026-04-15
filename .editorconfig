@@ -1,8 +1,0 @@
-root=true
-
-[*]
-indent_style=tab
-semi= false
-insert_final_newline=true
-tab_width=3
-end_of_line=lf
