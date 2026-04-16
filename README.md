@@ -67,7 +67,7 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 For auto save and linting, add the following settings to your VSCode configuration:
 
-file path: `.vscode/settings.json`
+a file path: `.vscode/settings.json`
 
 ```json
 {
