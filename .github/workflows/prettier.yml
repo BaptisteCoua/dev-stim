@@ -1,0 +1,25 @@
+name: autofix.ci
+on:
+  pull_request:
+  push:
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+          run_install: false
+      - run: |
+          pnpm install --frozen-lockfile
+          pnpm prettier . --write
+      - uses: autofix-ci/action@v1
+        with:
+          commit-message: "Apply Prettier format"
