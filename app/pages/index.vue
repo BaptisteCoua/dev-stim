@@ -1,22 +1,22 @@
 <script setup lang="ts">
-const email = ref('')
-const password = ref('')
-const error = ref('')
-const loading = ref(false)
+const email = ref("");
+const password = ref("");
+const error = ref("");
+const loading = ref(false);
 
 async function login() {
-  error.value = ''
-  loading.value = true
+  error.value = "";
+  loading.value = true;
   try {
-    await $fetch('/api/auth/login', {
-      method: 'POST',
+    await $fetch("/api/auth/login", {
+      method: "POST",
       body: { email: email.value, password: password.value },
-    })
-    await navigateTo('/')
+    });
+    await navigateTo("/");
   } catch (e: any) {
-    error.value = e.data?.message || 'Une erreur est survenue'
+    error.value = e.data?.message || "Une erreur est survenue";
   } finally {
-    loading.value = false
+    loading.value = false;
   }
 }
 </script>
@@ -35,11 +35,16 @@ async function login() {
       </div>
       <div class="field">
         <label>Mot de passe</label>
-        <input v-model="password" type="password" placeholder="••••••••" @keyup.enter="login" />
+        <input
+          v-model="password"
+          type="password"
+          placeholder="••••••••"
+          @keyup.enter="login"
+        />
       </div>
 
       <button :disabled="loading" @click="login">
-        {{ loading ? 'Connexion...' : 'Se connecter' }}
+        {{ loading ? "Connexion..." : "Se connecter" }}
       </button>
     </div>
   </div>
@@ -61,8 +66,16 @@ async function login() {
   width: 100%;
   max-width: 380px;
 }
-h1 { font-size: 20px; font-weight: 500; margin-bottom: 6px; }
-.sub { font-size: 14px; color: #666; margin-bottom: 1.5rem; }
+h1 {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.sub {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
 .error {
   font-size: 13px;
   color: #c0392b;
@@ -71,8 +84,15 @@ h1 { font-size: 20px; font-weight: 500; margin-bottom: 6px; }
   padding: 8px 12px;
   margin-bottom: 1rem;
 }
-label { font-size: 13px; color: #555; display: block; margin-bottom: 6px; }
-.field { margin-bottom: 1rem; }
+label {
+  font-size: 13px;
+  color: #555;
+  display: block;
+  margin-bottom: 6px;
+}
+.field {
+  margin-bottom: 1rem;
+}
 input {
   width: 100%;
   padding: 8px 12px;
@@ -81,7 +101,9 @@ input {
   border-radius: 8px;
   outline: none;
 }
-input:focus { border-color: #999; }
+input:focus {
+  border-color: #999;
+}
 button {
   width: 100%;
   padding: 10px;
@@ -94,5 +116,8 @@ button {
   cursor: pointer;
   margin-top: 0.5rem;
 }
-button:disabled { opacity: 0.6; cursor: not-allowed; }
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
 </style>

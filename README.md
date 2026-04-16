@@ -2,13 +2,13 @@
 
 Dashboard for monitoring and analyzing insights from Stacktim.
 
-## Setup 
+## Setup
 
 ### Local Development
 
 #### Install dependencies:
 
-```bash 
+```bash
 
 pnpm i
 
@@ -16,7 +16,7 @@ pnpm i
 
 #### Start the development server on `http://localhost:3000`:
 
-```bash 
+```bash
 
 pnpm dev
 
@@ -60,6 +60,5 @@ Start the development server on `http://localhost:3000`:
 docker compose up
 
 ```
-
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
