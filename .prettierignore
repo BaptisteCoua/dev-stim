@@ -1,3 +1,6 @@
 # Ignore artifacts:
 build
 coverage
+
+# GitHub Actions (autofix-ci cannot modify .github/)
+.github/
