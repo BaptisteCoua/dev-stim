@@ -62,3 +62,23 @@ docker compose up
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## Config VSCode
+
+For auto save and linting, add the following settings to your VSCode configuration:
+
+file path: `.vscode/settings.json`
+
+```json
+{
+   "eslint.useFlatConfig": true,
+   "editor.formatOnSave": true,
+   "editor.defaultFormatter": "esbenp.prettier-vscode",
+   "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+   },
+   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+   "eslint.format.enable": false,
+   "prettier.requireConfig": true
+}
+```
