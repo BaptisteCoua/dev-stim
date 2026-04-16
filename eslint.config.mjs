@@ -1,13 +1,26 @@
-import withNuxt from "./.nuxt/eslint.config.mjs";
+import withNuxt from './.nuxt/eslint.config.mjs'
 
-export default withNuxt();
-// your custom flat configs go here, for example:
-// {
-//   files: ['**/*.ts', '**/*.tsx'],
-//   rules: {
-//     'no-console': 'off' // allow console.log in TypeScript files
-//   }
-// },
-// {
-//   ...
-// }
+export default withNuxt({
+   files: ['**/*.ts', '**/*.tsx', '**/*.vue'],
+   rules: {
+      // TypeScript
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+
+      // Vue
+      'vue/html-self-closing': [
+         'warn',
+         {
+            html: { void: 'always', normal: 'always', component: 'always' },
+            svg: 'always',
+            math: 'always',
+         },
+      ],
+      'vue/multi-word-component-names': 'off',
+      'vue/no-unused-vars': 'warn',
+
+      // Général
+      'no-console': 'warn',
+      'no-debugger': 'warn',
+   },
+})
