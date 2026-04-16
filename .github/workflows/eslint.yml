@@ -44,9 +44,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Install SARIF formatter
-        run: pnpm add -D @microsoft/eslint-formatter-sarif
-
       - name: Run ESLint
         env:
           SARIF_ESLINT_IGNORE_SUPPRESSED: "true"
