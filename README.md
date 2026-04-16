@@ -1,6 +1,6 @@
 # STIM - Stacktim Insights Monitor
 
-Dashboard for monitoring and analyzing insights from Stacktim.
+Dashboard for monitoring and analyzing insights from Stacktim. (test)
 
 ## Setup
 
