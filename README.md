@@ -2,7 +2,45 @@
 
 Dashboard for monitoring and analyzing insights from Stacktim.
 
-## Setup
+## Setup 
+
+### Local Development
+
+#### Install dependencies:
+
+```bash 
+
+pnpm i
+
+```
+
+#### Start the development server on `http://localhost:3000`:
+
+```bash 
+
+pnpm dev
+
+```
+
+## Setup with docker
+
+### Database
+
+Start migration :
+
+```bash
+
+npx drizzle-kit push
+
+```
+
+Visualisation of the database with drizzle :
+
+```bash
+
+npx drizzle-kit studio
+
+```
 
 Make sure to install dependencies:
 
@@ -13,23 +51,13 @@ docker compose up --build
 
 ```
 
-## Development Server
+### Development Server
 
 Start the development server on `http://localhost:3000`:
 
 ```bash
 
 docker compose up
-
-```
-
-## Database
-
-Start migration :
-
-```bash
-
-npx drizzle-kit push
 
 ```
 
