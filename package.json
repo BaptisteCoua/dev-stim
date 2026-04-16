@@ -20,6 +20,7 @@
     "vue-router": "^5.0.4"
   },
   "devDependencies": {
+    "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@nuxt/eslint": "^1.15.2",
     "@types/pg": "^8.20.0",
     "drizzle-kit": "^0.31.10",
