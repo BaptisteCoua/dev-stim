@@ -1,6 +1,6 @@
-# Nuxt Minimal Starter
+# STIM - Stacktim Insights Monitor
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Dashboard for monitoring and analyzing insights from Stacktim.
 
 ## Setup
 
