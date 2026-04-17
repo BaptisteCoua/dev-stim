@@ -3,9 +3,9 @@ import { defineOSDDNuxtConfig } from 'nuxt-osdd'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineOSDDNuxtConfig({
    osdd: {
-    technical: ['Authentication', 'Permissions', 'Vuetify', 'Template'],
-    functional: []
-  },
+      technical: ['Authentication', 'Permissions', 'Vuetify', 'Template'],
+      functional: [],
+   },
    compatibilityDate: '2025-07-15',
    modules: ['nuxt-auth-utils', '@nuxt/eslint', '@nuxtjs/i18n'],
    devtools: { enabled: true },
