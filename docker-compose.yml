@@ -12,8 +12,8 @@ services:
          - /app/.nuxt
       depends_on:
          - postgres
-      env_file:
-         - .env
+      environment:
+        RUNNING_IN_DOCKER: "true"
 
    postgres:
       image: postgres:18-alpine
