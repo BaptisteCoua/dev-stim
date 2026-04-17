@@ -17,6 +17,7 @@
       "dotenv": "^17.4.2",
       "drizzle-orm": "^0.45.2",
       "nuxt-auth-utils": "^0.5.29",
+      "nuxt-osdd": "^1.0.5",
       "pg": "^8.20.0",
       "vue": "^3.5.32",
       "vue-router": "^5.0.4"
