@@ -13,6 +13,7 @@
    },
    "dependencies": {
       "@mdi/font": "^7.4.47",
+      "@nuxtjs/i18n": "^10.2.4",
       "dotenv": "^17.4.2",
       "drizzle-orm": "^0.45.2",
       "nuxt-auth-utils": "^0.5.29",
