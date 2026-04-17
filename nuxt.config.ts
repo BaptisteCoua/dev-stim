@@ -8,10 +8,7 @@ export default defineNuxtConfig({
       transpile: ['vuetify'],
    },
    vite: {
-      plugins: [
-         // @ts-expect-error
-         vuetify({ autoImport: true }),
-      ],
+      plugins: [vuetify({ autoImport: true })],
       vue: {
          template: {
             transformAssetUrls,
