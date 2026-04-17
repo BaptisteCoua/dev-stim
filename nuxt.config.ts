@@ -5,24 +5,22 @@ export default defineNuxtConfig({
    modules: ['nuxt-auth-utils', '@nuxt/eslint', '@nuxtjs/i18n'],
    devtools: { enabled: true },
    build: {
-    transpile: ['vuetify'],
-  },
-  vite: {
-    plugins: [
-      // @ts-expect-error
-      vuetify({ autoImport: true }),
-    ],
-    vue: {
-      template: {
-        transformAssetUrls,
+      transpile: ['vuetify'],
+   },
+   vite: {
+      plugins: [
+         // @ts-expect-error
+         vuetify({ autoImport: true }),
+      ],
+      vue: {
+         template: {
+            transformAssetUrls,
+         },
       },
-    },
-  },
-  i18n: {
-    locales: [
-      { code: 'fr-FR', iso: 'fr-FR', name: 'Français', file: 'fr-FR.ts' },
-    ],
-    langDir: 'locales/',
-    defaultLocale: 'fr-FR',
-  },
+   },
+   i18n: {
+      locales: [{ code: 'fr-FR', iso: 'fr-FR', name: 'Français', file: 'fr-FR.ts' }],
+      langDir: 'locales/',
+      defaultLocale: 'fr-FR',
+   },
 })

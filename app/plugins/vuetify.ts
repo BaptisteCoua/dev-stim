@@ -6,8 +6,8 @@ import { createVuetify } from 'vuetify'
 import defaults from './vuetify/defaults'
 
 export default defineNuxtPlugin((app) => {
-  const vuetify = createVuetify({
-    defaults,
-  })
-  app.vueApp.use(vuetify)
+   const vuetify = createVuetify({
+      defaults,
+   })
+   app.vueApp.use(vuetify)
 })
