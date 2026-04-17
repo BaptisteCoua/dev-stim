@@ -13,7 +13,7 @@ services:
       depends_on:
          - postgres
       environment:
-        RUNNING_IN_DOCKER: "true"
+         RUNNING_IN_DOCKER: 'true'
 
    postgres:
       image: postgres:18-alpine
