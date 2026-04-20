@@ -23,4 +23,5 @@ export default withNuxt({
       'no-console': 'warn',
       'no-debugger': 'warn',
    },
+   ignores: ['prisma/generated/**'],
 })
