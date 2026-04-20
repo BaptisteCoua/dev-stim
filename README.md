@@ -63,7 +63,6 @@ pnpm prisma studio
 
 ```
 
-
 ## Config VSCode
 
 For auto save and linting, add the following settings to your VSCode configuration:
