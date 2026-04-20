@@ -15,3 +15,20 @@ model User {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
+
+model Team {
+  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String
+  createdAt DateTime @default(now())
+  userJiras   UserJira[]
+}
+
+model UserJira {
+  id        String   @id @default(uuid())
+  team      Team     @relation(fields: [teamId], references: [id])
+  teamId    String
+  name      String
+  email     String
+  accountId String
+  avatarUrl String
+}
