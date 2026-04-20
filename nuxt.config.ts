@@ -3,7 +3,7 @@ import { defineOSDDNuxtConfig } from 'nuxt-osdd'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineOSDDNuxtConfig({
    osdd: {
-      technical: ['Authentication', 'Permissions', 'Vuetify', 'Template', 'Toastify'],
+      technical: ['Authentication', 'Permissions', 'Vuetify', 'Template', 'Toastify', 'Swiper'],
       functional: [],
    },
    compatibilityDate: '2025-07-15',
