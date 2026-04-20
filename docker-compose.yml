@@ -8,8 +8,7 @@ services:
          - '3000:3000'
       volumes:
          - .:/app
-         - node_modules:/app/node_modules
-         - nuxt_data:/app/.nuxt
+         - /app/.nuxt
       depends_on:
          - postgres
       environment:
@@ -28,5 +27,3 @@ services:
 
 volumes:
    postgres_data:
-   node_modules:
-   nuxt_data:

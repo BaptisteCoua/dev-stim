@@ -4,8 +4,13 @@ WORKDIR /app
 
 RUN corepack enable
 
-COPY package.json pnpm-lock.yaml ./
+COPY package.json ./
+COPY pnpm-lock.yaml ./
+
+RUN pnpm install --frozen-lockfile
+
+COPY . .
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "pnpm install && pnpm prisma generate && pnpm dev --host 0.0.0.0"]
+CMD ["pnpm", "dev", "--host", "0.0.0.0"]
