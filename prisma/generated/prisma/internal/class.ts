@@ -19,7 +19,7 @@ const config: runtime.GetPrismaClientConfig = {
    engineVersion: '75cbdc1eb7150937890ad5465d861175c6624711',
    activeProvider: 'postgresql',
    inlineSchema:
-      'generator client {\n  provider   = "prisma-client"\n  output     = "./generated/prisma"\n  engineType = "client"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n\nmodel User {\n  id        String   @id @default(cuid())\n  email     String   @unique\n  name      String?\n  createdAt DateTime @default(now())\n}\n',
+      'generator client {\n  provider   = "prisma-client"\n  output     = "./generated/prisma"\n  engineType = "client"\n}\n\ndatasource db {\n  provider = "postgresql"\n}\n\nmodel User {\n  id           String   @id @default(cuid())\n  email        String   @unique\n  passwordHash String\n  createdAt    DateTime @default(now())\n  updatedAt    DateTime @updatedAt\n}\n',
    runtimeDataModel: {
       models: {},
       enums: {},
