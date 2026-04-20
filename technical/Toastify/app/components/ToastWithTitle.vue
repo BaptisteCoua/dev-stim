@@ -7,8 +7,8 @@
    </div>
 </template>
 <script setup lang="ts">
-const props = defineProps({
-   title: { type: String },
-   message: { type: String },
-})
+   const props = defineProps({
+      title: { type: String },
+      message: { type: String },
+   })
 </script>

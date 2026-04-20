@@ -9,8 +9,8 @@ export default defineNuxtPlugin((nuxtApp) => {
       limit: 3,
       newestOnTop: true,
       style: {
-         width: '500px'
-      }
+         width: '500px',
+      },
    })
 
    return {
