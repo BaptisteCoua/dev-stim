@@ -24,24 +24,6 @@ pnpm dev
 
 ## Setup with docker
 
-### Database
-
-Start migration :
-
-```bash
-
-npx drizzle-kit push
-
-```
-
-Visualisation of the database with drizzle :
-
-```bash
-
-npx drizzle-kit studio
-
-```
-
 Make sure to install dependencies:
 
 ```bash
@@ -62,6 +44,25 @@ docker compose up
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+### Database
+
+Start migration :
+
+```bash
+
+pnpm prisma migrate dev --name 'name of migration'
+
+```
+
+Visualisation of the database with drizzle :
+
+```bash
+
+pnpm prisma studio
+
+```
+
 
 ## Config VSCode
 
