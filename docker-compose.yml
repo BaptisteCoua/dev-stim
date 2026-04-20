@@ -13,7 +13,7 @@ services:
          - postgres
       environment:
          RUNNING_IN_DOCKER: 'true'
-      
+
    storybook:
       build:
          context: .
