@@ -25,3 +25,6 @@ logs
 !.env.example
 
 /app/generated/prisma
+
+*storybook.log
+storybook-static
