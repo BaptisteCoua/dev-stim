@@ -183,12 +183,14 @@ export type UserJiraWhereInput = {
    OR?: Prisma.UserJiraWhereInput[]
    NOT?: Prisma.UserJiraWhereInput | Prisma.UserJiraWhereInput[]
    id?: Prisma.StringFilter<'UserJira'> | string
-   teamId?: Prisma.StringFilter<'UserJira'> | string
+   teamId?: Prisma.UuidFilter<'UserJira'> | string
    name?: Prisma.StringFilter<'UserJira'> | string
    email?: Prisma.StringFilter<'UserJira'> | string
    accountId?: Prisma.StringFilter<'UserJira'> | string
    avatarUrl?: Prisma.StringFilter<'UserJira'> | string
    team?: Prisma.XOR<Prisma.TeamScalarRelationFilter, Prisma.TeamWhereInput>
+   ticket?: Prisma.XOR<Prisma.TicketNullableScalarRelationFilter, Prisma.TicketWhereInput> | null
+   story?: Prisma.XOR<Prisma.StoryNullableScalarRelationFilter, Prisma.StoryWhereInput> | null
 }
 
 export type UserJiraOrderByWithRelationInput = {
@@ -199,6 +201,8 @@ export type UserJiraOrderByWithRelationInput = {
    accountId?: Prisma.SortOrder
    avatarUrl?: Prisma.SortOrder
    team?: Prisma.TeamOrderByWithRelationInput
+   ticket?: Prisma.TicketOrderByWithRelationInput
+   story?: Prisma.StoryOrderByWithRelationInput
 }
 
 export type UserJiraWhereUniqueInput = Prisma.AtLeast<
@@ -207,12 +211,14 @@ export type UserJiraWhereUniqueInput = Prisma.AtLeast<
       AND?: Prisma.UserJiraWhereInput | Prisma.UserJiraWhereInput[]
       OR?: Prisma.UserJiraWhereInput[]
       NOT?: Prisma.UserJiraWhereInput | Prisma.UserJiraWhereInput[]
-      teamId?: Prisma.StringFilter<'UserJira'> | string
+      teamId?: Prisma.UuidFilter<'UserJira'> | string
       name?: Prisma.StringFilter<'UserJira'> | string
       email?: Prisma.StringFilter<'UserJira'> | string
       accountId?: Prisma.StringFilter<'UserJira'> | string
       avatarUrl?: Prisma.StringFilter<'UserJira'> | string
       team?: Prisma.XOR<Prisma.TeamScalarRelationFilter, Prisma.TeamWhereInput>
+      ticket?: Prisma.XOR<Prisma.TicketNullableScalarRelationFilter, Prisma.TicketWhereInput> | null
+      story?: Prisma.XOR<Prisma.StoryNullableScalarRelationFilter, Prisma.StoryWhereInput> | null
    },
    'id'
 >
@@ -238,7 +244,7 @@ export type UserJiraScalarWhereWithAggregatesInput = {
       | Prisma.UserJiraScalarWhereWithAggregatesInput
       | Prisma.UserJiraScalarWhereWithAggregatesInput[]
    id?: Prisma.StringWithAggregatesFilter<'UserJira'> | string
-   teamId?: Prisma.StringWithAggregatesFilter<'UserJira'> | string
+   teamId?: Prisma.UuidWithAggregatesFilter<'UserJira'> | string
    name?: Prisma.StringWithAggregatesFilter<'UserJira'> | string
    email?: Prisma.StringWithAggregatesFilter<'UserJira'> | string
    accountId?: Prisma.StringWithAggregatesFilter<'UserJira'> | string
@@ -252,6 +258,8 @@ export type UserJiraCreateInput = {
    accountId: string
    avatarUrl: string
    team: Prisma.TeamCreateNestedOneWithoutUserJirasInput
+   ticket?: Prisma.TicketCreateNestedOneWithoutUserJiraInput
+   story?: Prisma.StoryCreateNestedOneWithoutUserJiraInput
 }
 
 export type UserJiraUncheckedCreateInput = {
@@ -261,6 +269,8 @@ export type UserJiraUncheckedCreateInput = {
    email: string
    accountId: string
    avatarUrl: string
+   ticket?: Prisma.TicketUncheckedCreateNestedOneWithoutUserJiraInput
+   story?: Prisma.StoryUncheckedCreateNestedOneWithoutUserJiraInput
 }
 
 export type UserJiraUpdateInput = {
@@ -270,6 +280,8 @@ export type UserJiraUpdateInput = {
    accountId?: Prisma.StringFieldUpdateOperationsInput | string
    avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
    team?: Prisma.TeamUpdateOneRequiredWithoutUserJirasNestedInput
+   ticket?: Prisma.TicketUpdateOneWithoutUserJiraNestedInput
+   story?: Prisma.StoryUpdateOneWithoutUserJiraNestedInput
 }
 
 export type UserJiraUncheckedUpdateInput = {
@@ -279,6 +291,8 @@ export type UserJiraUncheckedUpdateInput = {
    email?: Prisma.StringFieldUpdateOperationsInput | string
    accountId?: Prisma.StringFieldUpdateOperationsInput | string
    avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+   ticket?: Prisma.TicketUncheckedUpdateOneWithoutUserJiraNestedInput
+   story?: Prisma.StoryUncheckedUpdateOneWithoutUserJiraNestedInput
 }
 
 export type UserJiraCreateManyInput = {
@@ -342,6 +356,11 @@ export type UserJiraMinOrderByAggregateInput = {
    email?: Prisma.SortOrder
    accountId?: Prisma.SortOrder
    avatarUrl?: Prisma.SortOrder
+}
+
+export type UserJiraScalarRelationFilter = {
+   is?: Prisma.UserJiraWhereInput
+   isNot?: Prisma.UserJiraWhereInput
 }
 
 export type UserJiraCreateNestedManyWithoutTeamInput = {
@@ -430,12 +449,66 @@ export type UserJiraUncheckedUpdateManyWithoutTeamNestedInput = {
    deleteMany?: Prisma.UserJiraScalarWhereInput | Prisma.UserJiraScalarWhereInput[]
 }
 
+export type UserJiraCreateNestedOneWithoutTicketInput = {
+   create?: Prisma.XOR<
+      Prisma.UserJiraCreateWithoutTicketInput,
+      Prisma.UserJiraUncheckedCreateWithoutTicketInput
+   >
+   connectOrCreate?: Prisma.UserJiraCreateOrConnectWithoutTicketInput
+   connect?: Prisma.UserJiraWhereUniqueInput
+}
+
+export type UserJiraUpdateOneRequiredWithoutTicketNestedInput = {
+   create?: Prisma.XOR<
+      Prisma.UserJiraCreateWithoutTicketInput,
+      Prisma.UserJiraUncheckedCreateWithoutTicketInput
+   >
+   connectOrCreate?: Prisma.UserJiraCreateOrConnectWithoutTicketInput
+   upsert?: Prisma.UserJiraUpsertWithoutTicketInput
+   connect?: Prisma.UserJiraWhereUniqueInput
+   update?: Prisma.XOR<
+      Prisma.XOR<
+         Prisma.UserJiraUpdateToOneWithWhereWithoutTicketInput,
+         Prisma.UserJiraUpdateWithoutTicketInput
+      >,
+      Prisma.UserJiraUncheckedUpdateWithoutTicketInput
+   >
+}
+
+export type UserJiraCreateNestedOneWithoutStoryInput = {
+   create?: Prisma.XOR<
+      Prisma.UserJiraCreateWithoutStoryInput,
+      Prisma.UserJiraUncheckedCreateWithoutStoryInput
+   >
+   connectOrCreate?: Prisma.UserJiraCreateOrConnectWithoutStoryInput
+   connect?: Prisma.UserJiraWhereUniqueInput
+}
+
+export type UserJiraUpdateOneRequiredWithoutStoryNestedInput = {
+   create?: Prisma.XOR<
+      Prisma.UserJiraCreateWithoutStoryInput,
+      Prisma.UserJiraUncheckedCreateWithoutStoryInput
+   >
+   connectOrCreate?: Prisma.UserJiraCreateOrConnectWithoutStoryInput
+   upsert?: Prisma.UserJiraUpsertWithoutStoryInput
+   connect?: Prisma.UserJiraWhereUniqueInput
+   update?: Prisma.XOR<
+      Prisma.XOR<
+         Prisma.UserJiraUpdateToOneWithWhereWithoutStoryInput,
+         Prisma.UserJiraUpdateWithoutStoryInput
+      >,
+      Prisma.UserJiraUncheckedUpdateWithoutStoryInput
+   >
+}
+
 export type UserJiraCreateWithoutTeamInput = {
    id?: string
    name: string
    email: string
    accountId: string
    avatarUrl: string
+   ticket?: Prisma.TicketCreateNestedOneWithoutUserJiraInput
+   story?: Prisma.StoryCreateNestedOneWithoutUserJiraInput
 }
 
 export type UserJiraUncheckedCreateWithoutTeamInput = {
@@ -444,6 +517,8 @@ export type UserJiraUncheckedCreateWithoutTeamInput = {
    email: string
    accountId: string
    avatarUrl: string
+   ticket?: Prisma.TicketUncheckedCreateNestedOneWithoutUserJiraInput
+   story?: Prisma.StoryUncheckedCreateNestedOneWithoutUserJiraInput
 }
 
 export type UserJiraCreateOrConnectWithoutTeamInput = {
@@ -492,11 +567,147 @@ export type UserJiraScalarWhereInput = {
    OR?: Prisma.UserJiraScalarWhereInput[]
    NOT?: Prisma.UserJiraScalarWhereInput | Prisma.UserJiraScalarWhereInput[]
    id?: Prisma.StringFilter<'UserJira'> | string
-   teamId?: Prisma.StringFilter<'UserJira'> | string
+   teamId?: Prisma.UuidFilter<'UserJira'> | string
    name?: Prisma.StringFilter<'UserJira'> | string
    email?: Prisma.StringFilter<'UserJira'> | string
    accountId?: Prisma.StringFilter<'UserJira'> | string
    avatarUrl?: Prisma.StringFilter<'UserJira'> | string
+}
+
+export type UserJiraCreateWithoutTicketInput = {
+   id?: string
+   name: string
+   email: string
+   accountId: string
+   avatarUrl: string
+   team: Prisma.TeamCreateNestedOneWithoutUserJirasInput
+   story?: Prisma.StoryCreateNestedOneWithoutUserJiraInput
+}
+
+export type UserJiraUncheckedCreateWithoutTicketInput = {
+   id?: string
+   teamId: string
+   name: string
+   email: string
+   accountId: string
+   avatarUrl: string
+   story?: Prisma.StoryUncheckedCreateNestedOneWithoutUserJiraInput
+}
+
+export type UserJiraCreateOrConnectWithoutTicketInput = {
+   where: Prisma.UserJiraWhereUniqueInput
+   create: Prisma.XOR<
+      Prisma.UserJiraCreateWithoutTicketInput,
+      Prisma.UserJiraUncheckedCreateWithoutTicketInput
+   >
+}
+
+export type UserJiraUpsertWithoutTicketInput = {
+   update: Prisma.XOR<
+      Prisma.UserJiraUpdateWithoutTicketInput,
+      Prisma.UserJiraUncheckedUpdateWithoutTicketInput
+   >
+   create: Prisma.XOR<
+      Prisma.UserJiraCreateWithoutTicketInput,
+      Prisma.UserJiraUncheckedCreateWithoutTicketInput
+   >
+   where?: Prisma.UserJiraWhereInput
+}
+
+export type UserJiraUpdateToOneWithWhereWithoutTicketInput = {
+   where?: Prisma.UserJiraWhereInput
+   data: Prisma.XOR<
+      Prisma.UserJiraUpdateWithoutTicketInput,
+      Prisma.UserJiraUncheckedUpdateWithoutTicketInput
+   >
+}
+
+export type UserJiraUpdateWithoutTicketInput = {
+   id?: Prisma.StringFieldUpdateOperationsInput | string
+   name?: Prisma.StringFieldUpdateOperationsInput | string
+   email?: Prisma.StringFieldUpdateOperationsInput | string
+   accountId?: Prisma.StringFieldUpdateOperationsInput | string
+   avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+   team?: Prisma.TeamUpdateOneRequiredWithoutUserJirasNestedInput
+   story?: Prisma.StoryUpdateOneWithoutUserJiraNestedInput
+}
+
+export type UserJiraUncheckedUpdateWithoutTicketInput = {
+   id?: Prisma.StringFieldUpdateOperationsInput | string
+   teamId?: Prisma.StringFieldUpdateOperationsInput | string
+   name?: Prisma.StringFieldUpdateOperationsInput | string
+   email?: Prisma.StringFieldUpdateOperationsInput | string
+   accountId?: Prisma.StringFieldUpdateOperationsInput | string
+   avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+   story?: Prisma.StoryUncheckedUpdateOneWithoutUserJiraNestedInput
+}
+
+export type UserJiraCreateWithoutStoryInput = {
+   id?: string
+   name: string
+   email: string
+   accountId: string
+   avatarUrl: string
+   team: Prisma.TeamCreateNestedOneWithoutUserJirasInput
+   ticket?: Prisma.TicketCreateNestedOneWithoutUserJiraInput
+}
+
+export type UserJiraUncheckedCreateWithoutStoryInput = {
+   id?: string
+   teamId: string
+   name: string
+   email: string
+   accountId: string
+   avatarUrl: string
+   ticket?: Prisma.TicketUncheckedCreateNestedOneWithoutUserJiraInput
+}
+
+export type UserJiraCreateOrConnectWithoutStoryInput = {
+   where: Prisma.UserJiraWhereUniqueInput
+   create: Prisma.XOR<
+      Prisma.UserJiraCreateWithoutStoryInput,
+      Prisma.UserJiraUncheckedCreateWithoutStoryInput
+   >
+}
+
+export type UserJiraUpsertWithoutStoryInput = {
+   update: Prisma.XOR<
+      Prisma.UserJiraUpdateWithoutStoryInput,
+      Prisma.UserJiraUncheckedUpdateWithoutStoryInput
+   >
+   create: Prisma.XOR<
+      Prisma.UserJiraCreateWithoutStoryInput,
+      Prisma.UserJiraUncheckedCreateWithoutStoryInput
+   >
+   where?: Prisma.UserJiraWhereInput
+}
+
+export type UserJiraUpdateToOneWithWhereWithoutStoryInput = {
+   where?: Prisma.UserJiraWhereInput
+   data: Prisma.XOR<
+      Prisma.UserJiraUpdateWithoutStoryInput,
+      Prisma.UserJiraUncheckedUpdateWithoutStoryInput
+   >
+}
+
+export type UserJiraUpdateWithoutStoryInput = {
+   id?: Prisma.StringFieldUpdateOperationsInput | string
+   name?: Prisma.StringFieldUpdateOperationsInput | string
+   email?: Prisma.StringFieldUpdateOperationsInput | string
+   accountId?: Prisma.StringFieldUpdateOperationsInput | string
+   avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+   team?: Prisma.TeamUpdateOneRequiredWithoutUserJirasNestedInput
+   ticket?: Prisma.TicketUpdateOneWithoutUserJiraNestedInput
+}
+
+export type UserJiraUncheckedUpdateWithoutStoryInput = {
+   id?: Prisma.StringFieldUpdateOperationsInput | string
+   teamId?: Prisma.StringFieldUpdateOperationsInput | string
+   name?: Prisma.StringFieldUpdateOperationsInput | string
+   email?: Prisma.StringFieldUpdateOperationsInput | string
+   accountId?: Prisma.StringFieldUpdateOperationsInput | string
+   avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+   ticket?: Prisma.TicketUncheckedUpdateOneWithoutUserJiraNestedInput
 }
 
 export type UserJiraCreateManyTeamInput = {
@@ -513,6 +724,8 @@ export type UserJiraUpdateWithoutTeamInput = {
    email?: Prisma.StringFieldUpdateOperationsInput | string
    accountId?: Prisma.StringFieldUpdateOperationsInput | string
    avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+   ticket?: Prisma.TicketUpdateOneWithoutUserJiraNestedInput
+   story?: Prisma.StoryUpdateOneWithoutUserJiraNestedInput
 }
 
 export type UserJiraUncheckedUpdateWithoutTeamInput = {
@@ -521,6 +734,8 @@ export type UserJiraUncheckedUpdateWithoutTeamInput = {
    email?: Prisma.StringFieldUpdateOperationsInput | string
    accountId?: Prisma.StringFieldUpdateOperationsInput | string
    avatarUrl?: Prisma.StringFieldUpdateOperationsInput | string
+   ticket?: Prisma.TicketUncheckedUpdateOneWithoutUserJiraNestedInput
+   story?: Prisma.StoryUncheckedUpdateOneWithoutUserJiraNestedInput
 }
 
 export type UserJiraUncheckedUpdateManyWithoutTeamInput = {
@@ -542,6 +757,8 @@ export type UserJiraSelect<
       accountId?: boolean
       avatarUrl?: boolean
       team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
+      ticket?: boolean | Prisma.UserJira$ticketArgs<ExtArgs>
+      story?: boolean | Prisma.UserJira$storyArgs<ExtArgs>
    },
    ExtArgs['result']['userJira']
 >
@@ -595,6 +812,8 @@ export type UserJiraInclude<
    ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
    team?: boolean | Prisma.TeamDefaultArgs<ExtArgs>
+   ticket?: boolean | Prisma.UserJira$ticketArgs<ExtArgs>
+   story?: boolean | Prisma.UserJira$storyArgs<ExtArgs>
 }
 export type UserJiraIncludeCreateManyAndReturn<
    ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
@@ -613,6 +832,8 @@ export type $UserJiraPayload<
    name: 'UserJira'
    objects: {
       team: Prisma.$TeamPayload<ExtArgs>
+      ticket: Prisma.$TicketPayload<ExtArgs> | null
+      story: Prisma.$StoryPayload<ExtArgs> | null
    }
    scalars: runtime.Types.Extensions.GetPayloadResult<
       {
@@ -1171,6 +1392,32 @@ export interface Prisma__UserJiraClient<
       ExtArgs,
       GlobalOmitOptions
    >
+   ticket<T extends Prisma.UserJira$ticketArgs<ExtArgs> = {}>(
+      args?: Prisma.Subset<T, Prisma.UserJira$ticketArgs<ExtArgs>>,
+   ): Prisma.Prisma__TicketClient<
+      runtime.Types.Result.GetResult<
+         Prisma.$TicketPayload<ExtArgs>,
+         T,
+         'findUniqueOrThrow',
+         GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+   >
+   story<T extends Prisma.UserJira$storyArgs<ExtArgs> = {}>(
+      args?: Prisma.Subset<T, Prisma.UserJira$storyArgs<ExtArgs>>,
+   ): Prisma.Prisma__StoryClient<
+      runtime.Types.Result.GetResult<
+         Prisma.$StoryPayload<ExtArgs>,
+         T,
+         'findUniqueOrThrow',
+         GlobalOmitOptions
+      > | null,
+      null,
+      ExtArgs,
+      GlobalOmitOptions
+   >
    /**
     * Attaches callbacks for the resolution and/or rejection of the Promise.
     * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1633,6 +1880,48 @@ export type UserJiraDeleteManyArgs<
     * Limit how many UserJiras to delete.
     */
    limit?: number
+}
+
+/**
+ * UserJira.ticket
+ */
+export type UserJira$ticketArgs<
+   ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = {
+   /**
+    * Select specific fields to fetch from the Ticket
+    */
+   select?: Prisma.TicketSelect<ExtArgs> | null
+   /**
+    * Omit specific fields from the Ticket
+    */
+   omit?: Prisma.TicketOmit<ExtArgs> | null
+   /**
+    * Choose, which related nodes to fetch as well
+    */
+   include?: Prisma.TicketInclude<ExtArgs> | null
+   where?: Prisma.TicketWhereInput
+}
+
+/**
+ * UserJira.story
+ */
+export type UserJira$storyArgs<
+   ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = {
+   /**
+    * Select specific fields to fetch from the Story
+    */
+   select?: Prisma.StorySelect<ExtArgs> | null
+   /**
+    * Omit specific fields from the Story
+    */
+   omit?: Prisma.StoryOmit<ExtArgs> | null
+   /**
+    * Choose, which related nodes to fetch as well
+    */
+   include?: Prisma.StoryInclude<ExtArgs> | null
+   where?: Prisma.StoryWhereInput
 }
 
 /**

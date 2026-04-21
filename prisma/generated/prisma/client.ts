@@ -64,3 +64,28 @@ export type Team = Prisma.TeamModel
  *
  */
 export type UserJira = Prisma.UserJiraModel
+/**
+ * Model Ticket
+ *
+ */
+export type Ticket = Prisma.TicketModel
+/**
+ * Model Story
+ *
+ */
+export type Story = Prisma.StoryModel
+/**
+ * Model Status
+ *
+ */
+export type Status = Prisma.StatusModel
+/**
+ * Model Version
+ *
+ */
+export type Version = Prisma.VersionModel
+/**
+ * Model Sprint
+ *
+ */
+export type Sprint = Prisma.SprintModel
