@@ -15,6 +15,20 @@ services:
       environment:
          RUNNING_IN_DOCKER: 'true'
 
+   storybook:
+      build:
+         context: .
+         dockerfile: Dockerfile
+      container_name: storybook-app
+      ports:
+         - '6006:6006'
+      volumes:
+         - .:/app
+         - /app/.nuxt
+      command: pnpm storybook
+      environment:
+         RUNNING_IN_DOCKER: 'true'
+
    postgres:
       image: postgres:18-alpine
       container_name: postgres-db
