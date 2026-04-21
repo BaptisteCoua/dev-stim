@@ -1,10 +1,10 @@
 <script setup lang="ts">
    import type { FetchError } from 'ofetch'
 
-   const email = ref('')
-   const password = ref('')
-   const error = ref('')
-   const loading = ref(false)
+   const email = ref<string>('')
+   const password = ref<string>('')
+   const error = ref<string>('')
+   const loading = ref<boolean>(false)
 
    async function login() {
       error.value = ''
