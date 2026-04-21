@@ -9,7 +9,10 @@
       "preview": "nuxt preview",
       "postinstall": "nuxt prepare",
       "lint": "eslint .",
-      "lint:fix": "eslint . --fix"
+      "lint:fix": "eslint . --fix",
+      "storybook": "storybook dev -p 6006",
+      "build-storybook": "storybook build",
+      "chromatic": "npx chromatic"
    },
    "dependencies": {
       "@mdi/font": "^7.4.47",
@@ -26,12 +29,18 @@
    "devDependencies": {
       "@microsoft/eslint-formatter-sarif": "^3.1.0",
       "@nuxt/eslint": "^1.15.2",
+      "@nuxtjs/storybook": "^9.0.1",
+      "@storybook/addon-a11y": "^10.3.5",
+      "@storybook/addon-docs": "^10.3.5",
       "@types/node": "^25.6.0",
       "@types/pg": "^8.20.0",
+      "chromatic": "^16.3.0",
       "eslint": "^10.2.0",
+      "eslint-plugin-storybook": "^10.3.5",
       "nuxt": "^4.4.2",
       "prettier": "3.8.3",
       "prisma": "^7.7.0",
+      "storybook": "^10.3.5",
       "tsx": "^4.21.0",
       "typescript": "^6.0.2",
       "vite-plugin-vuetify": "^2.1.3",
