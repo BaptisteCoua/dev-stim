@@ -12,6 +12,7 @@
       "lint:fix": "eslint . --fix",
       "storybook": "storybook dev -p 6006",
       "build-storybook": "storybook build",
+      "prettier": "exec prettier . --write",
       "chromatic": "npx chromatic"
    },
    "dependencies": {
@@ -23,8 +24,10 @@
       "nuxt-auth-utils": "^0.5.29",
       "nuxt-osdd": "^1.0.5",
       "pg": "^8.20.0",
+      "swiper": "^12.1.3",
       "vue": "^3.5.32",
-      "vue-router": "^5.0.4"
+      "vue-router": "^5.0.4",
+      "vue3-toastify": "^0.2.9"
    },
    "devDependencies": {
       "@microsoft/eslint-formatter-sarif": "^3.1.0",
@@ -38,6 +41,7 @@
       "eslint": "^10.2.0",
       "eslint-plugin-storybook": "^10.3.5",
       "nuxt": "^4.4.2",
+      "nuxt-echarts": "^1.0.1",
       "prettier": "3.8.3",
       "prisma": "^7.7.0",
       "storybook": "^10.3.5",

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+   import type { FetchError } from 'ofetch'
+
    const email = ref('')
    const password = ref('')
    const error = ref('')
@@ -13,8 +15,9 @@
             body: { email: email.value, password: password.value },
          })
          await navigateTo('/')
-      } catch (e: any) {
-         error.value = e.data?.message || 'Une erreur est survenue'
+      } catch (e: unknown) {
+         const fetchError = e as FetchError
+         error.value = fetchError.data?.message || 'Une erreur est survenue'
       } finally {
          loading.value = false
       }
