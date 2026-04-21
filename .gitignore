@@ -24,5 +24,7 @@ logs
 .env.*
 !.env.example
 
+.pnpm-store
+
 *storybook.log
 storybook-static
