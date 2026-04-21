@@ -7,8 +7,14 @@
    </div>
 </template>
 <script setup lang="ts">
-   const props = defineProps({
-      title: { type: String },
-      message: { type: String },
-   })
+   withDefaults(
+      defineProps<{
+         title?: string
+         message?: string
+      }>(),
+      {
+         title: '',
+         message: '',
+      },
+   )
 </script>
