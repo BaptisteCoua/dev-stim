@@ -1,10 +1,11 @@
-import { resolveVuetifyTheme } from '@core/utils/vuetify'
-
 export const staticPrimaryColor = '#0052CC'
 
 const theme = {
-   defaultTheme: resolveVuetifyTheme(),
+   defaultTheme: 'light',
    themes: {
+    light: {
+        dark: false,
+        colors: {
       textColor: '#082D0F',
       bgBlue: '#AAC6DA',
       bgWhite: '#F5F7FA',
@@ -26,6 +27,8 @@ const theme = {
       bgPendingJira: 'rgba(16, 98, 218, 0.12)',
       white: '#FFFFFF',
       black: '#000000',
+    },
+    },
    },
 }
 
