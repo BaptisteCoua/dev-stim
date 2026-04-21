@@ -52,6 +52,11 @@ export const ModelName = {
    Role: 'Role',
    Team: 'Team',
    UserJira: 'UserJira',
+   Ticket: 'Ticket',
+   Story: 'Story',
+   Status: 'Status',
+   Version: 'Version',
+   Sprint: 'Sprint',
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -107,6 +112,69 @@ export const UserJiraScalarFieldEnum = {
 
 export type UserJiraScalarFieldEnum =
    (typeof UserJiraScalarFieldEnum)[keyof typeof UserJiraScalarFieldEnum]
+
+export const TicketScalarFieldEnum = {
+   id: 'id',
+   userJiraId: 'userJiraId',
+   statusId: 'statusId',
+   name: 'name',
+   priority: 'priority',
+   createdAt: 'createdAt',
+   ticketPoint: 'ticketPoint',
+} as const
+
+export type TicketScalarFieldEnum =
+   (typeof TicketScalarFieldEnum)[keyof typeof TicketScalarFieldEnum]
+
+export const StoryScalarFieldEnum = {
+   id: 'id',
+   userJiraId: 'userJiraId',
+   statusId: 'statusId',
+   versionId: 'versionId',
+   sprintId: 'sprintId',
+   name: 'name',
+   storyPoints: 'storyPoints',
+   createdAt: 'createdAt',
+   priority: 'priority',
+} as const
+
+export type StoryScalarFieldEnum = (typeof StoryScalarFieldEnum)[keyof typeof StoryScalarFieldEnum]
+
+export const StatusScalarFieldEnum = {
+   id: 'id',
+   label: 'label',
+} as const
+
+export type StatusScalarFieldEnum =
+   (typeof StatusScalarFieldEnum)[keyof typeof StatusScalarFieldEnum]
+
+export const VersionScalarFieldEnum = {
+   id: 'id',
+   statusId: 'statusId',
+   name: 'name',
+   description: 'description',
+   releaseDate: 'releaseDate',
+   startDate: 'startDate',
+   progress: 'progress',
+} as const
+
+export type VersionScalarFieldEnum =
+   (typeof VersionScalarFieldEnum)[keyof typeof VersionScalarFieldEnum]
+
+export const SprintScalarFieldEnum = {
+   id: 'id',
+   statusId: 'statusId',
+   name: 'name',
+   startDate: 'startDate',
+   endDate: 'endDate',
+   state: 'state',
+   originBoardId: 'originBoardId',
+   createdDate: 'createdDate',
+   completeDate: 'completeDate',
+} as const
+
+export type SprintScalarFieldEnum =
+   (typeof SprintScalarFieldEnum)[keyof typeof SprintScalarFieldEnum]
 
 export const SortOrder = {
    asc: 'asc',
