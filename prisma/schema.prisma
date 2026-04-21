@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client"
-  output   = "./generated/prisma"
+  provider   = "prisma-client"
+  output     = "./generated/prisma"
   engineType = "client"
 }
 
@@ -9,10 +9,10 @@ datasource db {
 }
 
 model User {
-  id           String   @id @default(uuid())
+  id String @id @default(uuid())
 
-  roleId       String
-  role         Role     @relation(fields: [roleId], references: [id])
+  roleId String
+  role   Role   @relation(fields: [roleId], references: [id])
 
   pseudo       String   @unique
   passwordHash String
@@ -21,25 +21,101 @@ model User {
 }
 
 model Role {
-  id    String @id @default(uuid())
-  name  String @unique
+  id   String @id @default(uuid())
+  name String @unique
 
   users User[]
 }
 
 model Team {
-  id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name      String
   createdAt DateTime @default(now())
-  userJiras   UserJira[]
+
+  userJiras UserJira[]
 }
 
 model UserJira {
-  id        String   @id @default(uuid())
-  team      Team     @relation(fields: [teamId], references: [id])
-  teamId    String
+  id        String  @id @default(uuid())
+  team      Team    @relation(fields: [teamId], references: [id])
+  teamId    String  @db.Uuid
   name      String
   email     String
   accountId String
   avatarUrl String
+  ticket    Ticket?
+  story     Story?
+}
+
+model Ticket {
+  id String @id @default(uuid())
+
+  userJira   UserJira @relation(fields: [userJiraId], references: [id])
+  userJiraId String   @unique
+  status     Status   @relation(fields: [statusId], references: [id])
+  statusId   String   @unique
+  storys     Story[]
+
+  name        String
+  priority    String
+  createdAt   DateTime
+  ticketPoint Int
+}
+
+model Story {
+  id String @id @default(uuid())
+
+  userJira   UserJira @relation(fields: [userJiraId], references: [id])
+  userJiraId String   @unique
+  status     Status   @relation(fields: [statusId], references: [id])
+  statusId   String   @unique
+  version    Version  @relation(fields: [versionId], references: [id])
+  versionId  String   @unique
+  sprint     Sprint   @relation(fields: [sprintId], references: [id])
+  sprintId   String   @unique
+  tickets    Ticket[]
+
+  name        String
+  storyPoints Int
+  createdAt   DateTime
+  priority    String
+}
+
+model Status {
+  id      String   @id @default(uuid())
+  label   String
+  ticket  Ticket?
+  story   Story?
+  version Version?
+  sprint  Sprint?
+}
+
+model Version {
+  id String @id @default(uuid())
+
+  status   Status  @relation(fields: [statusId], references: [id])
+  statusId String  @unique
+  storys   Story[]
+
+  name        String
+  description String
+  releaseDate DateTime
+  startDate   DateTime
+  progress    DateTime
+}
+
+model Sprint {
+  id String @id @default(uuid())
+
+  status   Status  @relation(fields: [statusId], references: [id])
+  statusId String  @unique
+  storys   Story[]
+
+  name          String
+  startDate     DateTime
+  endDate       DateTime
+  state         String
+  originBoardId String
+  createdDate   DateTime
+  completeDate  String
 }
