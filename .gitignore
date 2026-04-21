@@ -26,5 +26,9 @@ logs
 
 .pnpm-store
 
+/app/generated/prisma
+prisma/generated/
+.prisma/
+
 *storybook.log
 storybook-static
