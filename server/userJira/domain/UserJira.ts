@@ -1,4 +1,4 @@
-import type { UserJiraDto } from '~/shared/dto/UserJiraDto'
+import type { UserJiraDto } from '~/technical/User/shared/dto/UserJiraDto'
 
 export class UserJira {
    private constructor(

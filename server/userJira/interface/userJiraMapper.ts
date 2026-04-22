@@ -1,5 +1,5 @@
 import type { UserJira as PrismaUserJira } from '~~/prisma/generated/prisma/client'
-import type { PersistedUserJiraDto, UserJiraDto } from '~/shared/dto/UserJiraDto'
+import type { PersistedUserJiraDto, UserJiraDto } from '~/technical/User/shared/dto/UserJiraDto'
 import { UserJira } from '~/server/userJira/domain/UserJira'
 
 export interface JiraWebhookUser {
