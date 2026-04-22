@@ -1,16 +1,16 @@
-import {
-   jiraUserRepository,
-   type CreateUserJiraDto,
-} from '~/server/repositories/jira-user.repository'
+import type { UserJiraDto } from '~/shared/dto/UserJiraDto'
+import { saveUserJira } from '~/server/userJira/application/saveUserJira'
 
 export default defineEventHandler(async (event) => {
-   const body = await readBody<CreateUserJiraDto>(event)
+   const body = await readBody<UserJiraDto>(event)
 
-   if (!body.accountId || !body.name || !body.email || !body.avatarUrl || !body.teamId) {
-      throw createError({ statusCode: 400, statusMessage: 'Missing required fields' })
+   try {
+      return await saveUserJira(body)
    }
-
-   const existing = await jiraUserRepository.findByAccountId(body.accountId)
-   const user = await jiraUserRepository.upsertByAccountId(body)
-   return { data: user, created: !existing }
+   catch (error) {
+      throw createError({
+         statusCode: 400,
+         statusMessage: error instanceof Error ? error.message : 'Invalid payload',
+      })
+   }
 })
