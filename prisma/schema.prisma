@@ -41,7 +41,7 @@ model UserJira {
   teamId    String  @db.Uuid
   name      String
   email     String
-  accountId String
+  accountId String  @unique
   avatarUrl String
   ticket    Ticket?
   story     Story?

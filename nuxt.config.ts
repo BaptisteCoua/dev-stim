@@ -11,6 +11,7 @@ export default defineOSDDNuxtConfig({
          'Toastify',
          'Swiper',
          'ECharts',
+         'User',
       ],
       functional: [],
    },
