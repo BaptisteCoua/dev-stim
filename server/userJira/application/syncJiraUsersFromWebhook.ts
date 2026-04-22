@@ -32,7 +32,7 @@ export async function syncJiraUsersFromWebhook(payload: JiraIssueWebhookPayload)
    }
 
    const { assignee, project } = issue.fields
-   // refaire la condition pour ne pas fetch les users si ils existe deja dans la base
+
    const teamId = await resolveTeamId(project.name)
 
    const users = [assignee].filter(Boolean) as JiraWebhookUser[]
