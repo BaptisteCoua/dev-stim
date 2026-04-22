@@ -1,4 +1,7 @@
-import { jiraUserRepository, type CreateUserJiraDto } from '../../repositories/jira-user.repository'
+import {
+   jiraUserRepository,
+   type CreateUserJiraDto,
+} from '~/server/repositories/jira-user.repository'
 
 export default defineEventHandler(async (event) => {
    const body = await readBody<CreateUserJiraDto>(event)

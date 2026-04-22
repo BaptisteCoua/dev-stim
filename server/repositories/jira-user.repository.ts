@@ -1,4 +1,4 @@
-import { prisma } from '../utils/db'
+import { prisma } from '~/server/utils/db'
 
 export interface CreateUserJiraDto {
    accountId: string

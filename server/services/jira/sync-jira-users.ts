@@ -1,6 +1,6 @@
-import { jiraUserRepository } from '../../repositories/jira-user.repository'
-import { teamRepository } from '../../repositories/team.repository'
-import { fetchJiraUser } from '../../utils/jira-api'
+import { jiraUserRepository } from '~/server/repositories/jira-user.repository'
+import { teamRepository } from '~/server/repositories/team.repository'
+import { fetchJiraUser } from '~/server/utils/jira-api'
 
 interface JiraWebhookUser {
    self: string

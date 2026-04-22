@@ -1,4 +1,4 @@
-import { syncJiraUsersFromWebhook } from '../services/jira/sync-jira-users'
+import { syncJiraUsersFromWebhook } from '~/server/services/jira/sync-jira-users'
 
 export default defineEventHandler(async (event) => {
    const body = await readBody(event)
@@ -7,9 +7,9 @@ export default defineEventHandler(async (event) => {
       case 'jira:issue_created':
       case 'jira:issue_updated':
          // request
+         await syncJiraUsersFromWebhook(body)
          break
       default:
-         await syncJiraUsersFromWebhook(body)
          console.log(`[webhook] Unhandled event: ${body?.webhookEvent}`)
    }
 
