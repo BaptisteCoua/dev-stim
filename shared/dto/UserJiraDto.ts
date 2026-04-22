@@ -3,7 +3,6 @@ export interface UserJiraDto {
    name: string
    email: string
    avatarUrl: string
-   teamId: string
 }
 
 export interface PersistedUserJiraDto extends UserJiraDto {

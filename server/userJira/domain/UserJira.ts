@@ -6,7 +6,6 @@ export class UserJira {
       private readonly _name: string,
       private readonly _email: string,
       private readonly _avatarUrl: string,
-      private readonly _teamId: string,
       private readonly _id?: string,
    ) {}
 
@@ -15,13 +14,12 @@ export class UserJira {
       const name = data.name?.trim()
       const email = data.email?.trim()
       const avatarUrl = data.avatarUrl?.trim()
-      const teamId = data.teamId?.trim()
 
-      if (!accountId || !name || !email || !avatarUrl || !teamId) {
+      if (!accountId || !name || !email || !avatarUrl) {
          throw new Error('Missing required fields for UserJira')
       }
 
-      return new UserJira(accountId, name, email, avatarUrl, teamId, data.id)
+      return new UserJira(accountId, name, email, avatarUrl, data.id)
    }
 
    get id(): string | undefined {
@@ -44,17 +42,12 @@ export class UserJira {
       return this._avatarUrl
    }
 
-   get teamId(): string {
-      return this._teamId
-   }
-
    toDto(): UserJiraDto {
       return {
          accountId: this.accountId,
          name: this.name,
          email: this.email,
          avatarUrl: this.avatarUrl,
-         teamId: this.teamId,
       }
    }
 }

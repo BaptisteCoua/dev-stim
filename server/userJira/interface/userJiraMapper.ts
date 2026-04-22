@@ -52,16 +52,14 @@ export function fromPrismaUserJira(user: PrismaUserJira): UserJira {
       name: user.name,
       email: user.email,
       avatarUrl: user.avatarUrl,
-      teamId: user.teamId,
    })
 }
 
-export function fromJiraDetailToDomain(detail: JiraUserDetailDto, teamId: string): UserJira {
+export function fromJiraDetailToDomain(detail: JiraUserDetailDto): UserJira {
    return UserJira.create({
       accountId: detail.accountId,
       name: detail.displayName,
       email: detail.emailAddress,
       avatarUrl: detail.avatarUrls['48x48'],
-      teamId,
    })
 }

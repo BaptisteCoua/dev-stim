@@ -15,8 +15,22 @@ export class UserJiraRepository {
       return fromPrismaUserJira(user)
    }
 
-   async upsertByAccountId(user: UserJira): Promise<UserJira> {
+   async upsertByAccountId(user: UserJira, teamId?: string): Promise<UserJira> {
       const payload = user.toDto()
+      let resolvedTeamId = teamId
+
+      if (!resolvedTeamId) {
+         const existing = await prisma.userJira.findUnique({
+            where: { accountId: user.accountId },
+            select: { teamId: true },
+         })
+
+         if (!existing) {
+            throw new Error('Missing teamId for new UserJira upsert')
+         }
+
+         resolvedTeamId = existing.teamId
+      }
 
       const persisted = await prisma.userJira.upsert({
          where: { accountId: user.accountId },
@@ -24,9 +38,12 @@ export class UserJiraRepository {
             name: user.name,
             email: user.email,
             avatarUrl: user.avatarUrl,
-            teamId: user.teamId,
+            teamId: resolvedTeamId,
          },
-         create: payload,
+         create: {
+            ...payload,
+            teamId: resolvedTeamId,
+         },
       })
 
       return fromPrismaUserJira(persisted)
