@@ -3,6 +3,12 @@ import type { UserJira } from '~/server/userJira/domain/UserJira'
 import { fromPrismaUserJira } from '~/server/userJira/interface/userJiraMapper'
 
 export class UserJiraRepository {
+   async findAll(): Promise<UserJira[]> {
+      const users = await prisma.userJira.findMany()
+
+      return users.map(fromPrismaUserJira)
+   }
+
    async findByAccountId(accountId: string): Promise<UserJira | null> {
       const user = await prisma.userJira.findUnique({
          where: { accountId },
