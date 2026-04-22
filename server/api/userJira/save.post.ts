@@ -6,8 +6,7 @@ export default defineEventHandler(async (event) => {
 
    try {
       return await saveUserJira(body)
-   }
-   catch (error) {
+   } catch (error) {
       throw createError({
          statusCode: 400,
          statusMessage: error instanceof Error ? error.message : 'Invalid payload',
