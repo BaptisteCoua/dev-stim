@@ -5,6 +5,7 @@ export default defineEventHandler(async (event) => {
    const body = await readBody<JiraIssueWebhookPayload>(event)
 
    await syncJiraUsersFromWebhook(body)
+
    console.log(`[webhook] Unhandled event: ${body?.webhookEvent}`)
 
    switch (body?.webhookEvent) {
@@ -12,7 +13,6 @@ export default defineEventHandler(async (event) => {
       case 'jira:issue_updated':
          break
       default:
-         console.log(`[webhook] Unhandled event: ${body?.webhookEvent}`)
    }
 
    return { status: 'ok' }

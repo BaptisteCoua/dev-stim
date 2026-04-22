@@ -1,4 +1,4 @@
-import type { UserJiraDto } from '~/shared/dto/UserJiraDto'
+import type { UserJiraDto } from '~/technical/User/shared/dto/UserJiraDto'
 import { saveUserJira } from '~/server/userJira/application/saveUserJira'
 
 export default defineEventHandler(async (event) => {

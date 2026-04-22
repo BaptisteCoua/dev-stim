@@ -10,15 +10,11 @@ import { jiraApiClient } from '~/server/userJira/infrastructure/jiraApiClient'
 import { userJiraRepository } from '~/server/userJira/infrastructure/userJiraRepository'
 import { teamRepository } from '~/server/userJira/infrastructure/teamRepository'
 
-async function getOrCreateTeamId(teamName: string): Promise<string> {
-   const existingTeam = await teamRepository.findByName(teamName)
+async function syncOneUser(webhookUser: JiraWebhookUser, teamId: string): Promise<void> {
+   const fullUser = await jiraApiClient.fetchUser(webhookUser.self)
+   const user = fromJiraDetailToDomain(fullUser)
 
-   if (existingTeam) {
-      return existingTeam.id
-   }
-
-   const createdTeam = await teamRepository.create(teamName)
-   return createdTeam.id
+   await userJiraRepository.upsertByAccountId(user, teamId)
 }
 
 async function checkUserExist(webhookUser: JiraWebhookUser, teamId: string): Promise<void> {
@@ -37,11 +33,15 @@ async function checkUserExist(webhookUser: JiraWebhookUser, teamId: string): Pro
    }
 }
 
-async function syncOneUser(webhookUser: JiraWebhookUser, teamId: string): Promise<void> {
-   const fullUser = await jiraApiClient.fetchUser(webhookUser.self)
-   const user = fromJiraDetailToDomain(fullUser)
+async function getOrCreateTeamId(teamName: string): Promise<string> {
+   const existingTeam = await teamRepository.findByName(teamName)
 
-   await userJiraRepository.upsertByAccountId(user, teamId)
+   if (existingTeam) {
+      return existingTeam.id
+   }
+
+   const createdTeam = await teamRepository.create(teamName)
+   return createdTeam.id
 }
 
 export async function syncJiraUsersFromWebhook(payload: JiraIssueWebhookPayload): Promise<void> {
