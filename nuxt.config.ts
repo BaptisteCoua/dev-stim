@@ -11,7 +11,7 @@ export default defineOSDDNuxtConfig({
          'Toastify',
          'Swiper',
          'ECharts',
-      ],
+      , 'GradientCard'],
       functional: [],
    },
    compatibilityDate: '2025-07-15',
