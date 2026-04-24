@@ -1,10 +1,14 @@
 @use 'vuetify/settings' with (
-
-  $body-font-family: ('Poppins', sans-serif),
-  $heading-font-family: ('Poppins', sans-serif),
-
-  $rounded: (
-    'lg': 10px,
-    'xl': 20px,
-  ),
+   $body-font-family: (
+      'Poppins',
+      sans-serif,
+   ),
+   $heading-font-family: (
+      'Poppins',
+      sans-serif,
+   ),
+   $rounded: (
+      'lg': 10px,
+      'xl': 20px,
+   )
 );
