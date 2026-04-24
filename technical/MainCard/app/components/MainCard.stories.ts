@@ -3,17 +3,17 @@ import MainCard from '~/technical/MainCard/app/components/MainCard.vue'
 import TeamStatRow from '~/technical/TeamStatRow/app/components/TeamStatRow.vue'
 
 const slotVariants = {
-  empty:        null,
-  teamStatRows: markRaw({
-    components: { TeamStatRow },
-    template: `
+   empty: null,
+   teamStatRows: markRaw({
+      components: { TeamStatRow },
+      template: `
       <TeamStatRow label="Assigné" value=11 trend="down" color="error" />
       <TeamStatRow label="Complétés" labelPercentage=95 value=52 trend="up" color="success" />
       <TeamStatRow label="Bugs" value=4 trend="up" color="warning" />
       <TeamStatRow label="MEP version" value="2.11.0" color="info" />
       <TeamStatRow label="Progression" variant="progress" :value=65 color="success" />
     `,
-  }),
+   }),
 }
 
 const meta = {
@@ -36,7 +36,7 @@ const meta = {
          control: {
             type: 'select',
             labels: {
-               empty:        '— empty —',
+               empty: '— empty —',
                teamStatRows: 'TeamStatRows',
             },
          },
