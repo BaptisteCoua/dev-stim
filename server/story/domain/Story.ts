@@ -3,7 +3,7 @@ import type { StoryDto } from '~/technical/Story/shared/dto/StoryDto'
 export class Story {
    private constructor(
       private readonly _name: string,
-      private readonly _story_points: number,
+      private readonly _storyPoints: number,
       private readonly _createdAt: Date | string,
       private readonly _priority: string,
       private readonly _id?: string,
@@ -11,9 +11,10 @@ export class Story {
 
    static create(data: StoryDto & { id?: string }): Story {
       const name = data.name?.trim()
+      const priority = data.priority?.trim()
+
       const storyPoints = data.storyPoints
       const createdAt = data.createdAt
-      const priority = data.priority?.trim()
 
       if (!name || storyPoints == null || !createdAt || !priority) {
          throw new Error('Missing required fields for Story')
@@ -30,7 +31,7 @@ export class Story {
    }
 
    get storyPoints(): number {
-      return this._story_points
+      return this._storyPoints
    }
 
    get createdAt(): Date {

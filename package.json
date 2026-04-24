@@ -16,7 +16,7 @@
       "studio": "docker compose exec nuxt pnpm prisma studio --port 5555 --browser none",
       "generate": "docker compose exec nuxt pnpm prisma generate",
       "migrate": "docker compose exec nuxt pnpm prisma migrate deploy",
-      "migrate dev": "docker compose exec nuxt pnpm prisma migrate dev"
+      "migrate-dev": "docker compose exec nuxt pnpm prisma migrate dev"
    },
    "dependencies": {
       "@mdi/font": "^7.4.47",

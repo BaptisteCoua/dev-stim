@@ -43,17 +43,17 @@ model UserJira {
   email     String
   accountId String  @unique
   avatarUrl String
-  ticket    Ticket?
-  story     Story?
+  tickets Ticket[]
+  stories Story[]
 }
 
 model Ticket {
   id String @id @default(uuid())
 
-  userJira   UserJira @relation(fields: [userJiraId], references: [id])
-  userJiraId String   @unique
-  status     Status   @relation(fields: [statusId], references: [id])
-  statusId   String   @unique
+  userJira   UserJira? @relation(fields: [userJiraId], references: [id])
+  userJiraId String?   @unique
+  status     Status?   @relation(fields: [statusId], references: [id])
+  statusId   String?   @unique
   storys     Story[]
 
   name        String
@@ -65,14 +65,14 @@ model Ticket {
 model Story {
   id String @id @default(uuid())
 
-  userJira   UserJira @relation(fields: [userJiraId], references: [id])
-  userJiraId String   @unique
-  status     Status   @relation(fields: [statusId], references: [id])
-  statusId   String   @unique
-  version    Version  @relation(fields: [versionId], references: [id])
-  versionId  String   @unique
-  sprint     Sprint   @relation(fields: [sprintId], references: [id])
-  sprintId   String   @unique
+  userJira   UserJira? @relation(fields: [userJiraId], references: [id])
+  userJiraId String?   @unique
+  status     Status?   @relation(fields: [statusId], references: [id])
+  statusId   String?   @unique
+  version    Version?  @relation(fields: [versionId], references: [id])
+  versionId  String?   @unique
+  sprint     Sprint?   @relation(fields: [sprintId], references: [id])
+  sprintId   String?  @unique
   tickets    Ticket[]
 
   name        String
