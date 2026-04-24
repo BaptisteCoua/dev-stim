@@ -8,6 +8,7 @@ const meta = {
    args: {
       title: 'Ping Prod',
       gradientChosen: 'info',
+      mainInformation: 'Data',
    },
    argTypes: {
       gradientChosen: {
