@@ -12,15 +12,11 @@ export default defineOSDDNuxtConfig({
          'Swiper',
          'ECharts',
          'User',
+         'Localization',
       ],
       functional: [],
    },
    compatibilityDate: '2025-07-15',
    modules: ['nuxt-auth-utils', '@nuxt/eslint', '@nuxtjs/i18n', 'nuxt-echarts'],
    devtools: { enabled: true },
-   i18n: {
-      locales: [{ code: 'fr-FR', iso: 'fr-FR', name: 'Français', file: 'fr-FR.ts' }],
-      langDir: 'locales/',
-      defaultLocale: 'fr-FR',
-   },
 })
