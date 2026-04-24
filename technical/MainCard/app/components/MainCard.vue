@@ -1,5 +1,5 @@
 <template>
-    <v-card rounded="xl" class="pa-5" elevated="1">
+    <v-card rounded="xl" class="d-flex flex-column pa-5 ga-6">
         <div class="d-flex align-center justify-space-between">
             <v-card-title class="font-weight-semibold pa-0">
                 {{ title }}

@@ -1,6 +1,7 @@
 
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import MainCard from '~/technical/MainCard/app/components/MainCard.vue'
+import TeamStatRow from '~/technical/TeamStatRow/app/components/TeamStatRow.vue'
 
 const meta = {
     title: 'Components/MainCard',
@@ -16,15 +17,22 @@ const meta = {
         total: {
             control: 'number',
         },
+        default: {
+            table: { disable: true },
+        },
     },
     render: (args) => ({
-        components: { MainCard },
+        components: { MainCard, TeamStatRow },
         setup() {
         return { args }
         },
         template: `
         <MainCard v-bind="args">
-            <p>Contenu de la card</p>
+            <TeamStatRow label="Assigné" value=11 trend="down" color="error" />
+            <TeamStatRow label="Complétés" labelPercentage=95 value=52 trend="up" color="success" />
+            <TeamStatRow label="Bugs" value=4 trend="up" color="warning" />
+            <TeamStatRow label="MEP version" value="2.11.0" color="info" />
+            <TeamStatRow label="Progression" variant="progress" :value=65 color="success" />
         </MainCard>
         `,
     }),
