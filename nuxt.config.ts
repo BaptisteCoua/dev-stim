@@ -14,6 +14,7 @@ export default defineOSDDNuxtConfig({
          'User',
          'Localization',
          'GradientCard',
+         'MainCard',
       ],
       functional: [],
    },
