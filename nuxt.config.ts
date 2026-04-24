@@ -12,7 +12,7 @@ export default defineOSDDNuxtConfig({
          'Swiper',
          'ECharts',
          'User',
-      ],
+      , 'Story'],
       functional: [],
    },
    compatibilityDate: '2025-07-15',
