@@ -12,7 +12,6 @@ export default defineOSDDNuxtConfig({
          'Swiper',
          'ECharts',
          'User',
-         'TeamCard',
       ],
       functional: [],
    },
