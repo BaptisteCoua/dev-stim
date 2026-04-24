@@ -5,7 +5,7 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 
 setup((app) => {
-  app.use(createVuetify())
+   app.use(createVuetify())
 })
 
 const preview: Preview = {
