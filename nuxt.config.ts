@@ -13,6 +13,7 @@ export default defineOSDDNuxtConfig({
          'ECharts',
          'User',
          'Localization',
+         'MainCard',
       ],
       functional: [],
    },
