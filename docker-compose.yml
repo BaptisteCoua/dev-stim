@@ -6,6 +6,7 @@ services:
       container_name: nuxt-app
       ports:
          - '3000:3000'
+         - '5555:5555'
       volumes:
          - .:/app
          - node_modules:/app/node_modules
@@ -15,14 +16,28 @@ services:
       environment:
          RUNNING_IN_DOCKER: 'true'
 
+   storybook:
+      build:
+         context: .
+         dockerfile: Dockerfile
+      container_name: storybook-app
+      ports:
+         - '6006:6006'
+      volumes:
+         - .:/app
+         - /app/.nuxt
+      command: pnpm storybook
+      environment:
+         RUNNING_IN_DOCKER: 'true'
+
    postgres:
-      image: postgres:18-alpine
+      image: postgres:16-alpine
       container_name: postgres-db
       restart: always
       env_file:
          - .env
       ports:
-         - '5434:5432'
+         - '5432:5432'
       volumes:
          - postgres_data:/var/lib/postgresql/data
 

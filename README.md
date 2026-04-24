@@ -4,56 +4,9 @@ Dashboard for monitoring and analyzing insights from Stacktim. (test)
 
 ## Setup
 
-### Local Development
+### Setup with docker
 
-#### Install dependencies:
-
-```bash
-
-pnpm i
-
-```
-
-#### Start the development server on `http://localhost:3000`:
-
-```bash
-
-pnpm dev
-
-```
-
-## Setup with docker
-
-### Database
-
-Start migration :
-
-```bash
-
-npx drizzle-kit push
-
-```
-
-Visualisation of the database with drizzle :
-
-```bash
-
-npx drizzle-kit studio
-
-```
-
-Make sure to install dependencies:
-
-```bash
-
-# pnpm
-docker compose up --build
-
-```
-
-### Development Server
-
-Start the development server on `http://localhost:3000`:
+#### Install dependencies and start the development server on `http://localhost:3000`:
 
 ```bash
 
@@ -61,7 +14,23 @@ docker compose up
 
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+### Database
+
+Start migration :
+
+```bash
+
+pnpm run migrate
+
+```
+
+Visualisation of the database with drizzle :
+
+```bash
+
+pnpm run studio
+
+```
 
 ## Config VSCode
 

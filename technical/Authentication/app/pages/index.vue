@@ -1,8 +1,10 @@
 <script setup lang="ts">
-   const email = ref('')
-   const password = ref('')
-   const error = ref('')
-   const loading = ref(false)
+   import type { FetchError } from 'ofetch'
+
+   const email = ref<string>('')
+   const password = ref<string>('')
+   const error = ref<string>('')
+   const loading = ref<boolean>(false)
 
    async function login() {
       error.value = ''
@@ -13,8 +15,9 @@
             body: { email: email.value, password: password.value },
          })
          await navigateTo('/')
-      } catch (e: any) {
-         error.value = e.data?.message || 'Une erreur est survenue'
+      } catch (e: unknown) {
+         const fetchError = e as FetchError
+         error.value = fetchError.data?.message || 'Une erreur est survenue'
       } finally {
          loading.value = false
       }

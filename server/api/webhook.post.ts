@@ -1,12 +1,19 @@
+import type { JiraIssueWebhookPayload } from '~/server/userJira/interface/userJiraMapper'
+import { syncJiraUsersFromWebhook } from '~/server/userJira/application/syncJiraUsersFromWebhook'
+
 export default defineEventHandler(async (event) => {
-   const body = await readBody(event)
+   const body = await readBody<JiraIssueWebhookPayload>(event)
 
-   console.log('-------------------------------------------------')
-   console.log('Webhook reçu:', body)
+   await syncJiraUsersFromWebhook(body)
 
-   // TODO: vérifier signature si nécessaire
+   console.log('\x1b[34m%s\x1b[0m', `[webhook] Unhandled event: ${body?.webhookEvent}`)
 
-   return {
-      status: 'ok',
+   switch (body?.webhookEvent) {
+      case 'jira:issue_created':
+      case 'jira:issue_updated':
+         break
+      default:
    }
+
+   return { status: 'ok' }
 })
