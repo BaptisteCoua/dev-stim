@@ -34,34 +34,3 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
-
-export const Front: Story = {
-   args: {
-      title: 'Front',
-   },
-}
-
-export const Back: Story = {
-   args: {
-      title: 'Back',
-   },
-}
-
-export const Agent: Story = {
-   args: {
-      title: 'Agent',
-   },
-}
-
-export const Bugs: Story = {
-   args: {
-      title: 'Bugs critiques',
-   },
-}
-
-export const US: Story = {
-   args: {
-      title: 'US prioritaires',
-      total: 11,
-   },
-}
