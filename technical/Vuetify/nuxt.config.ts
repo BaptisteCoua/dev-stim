@@ -5,7 +5,7 @@ export default defineNuxtConfig({
       transpile: ['vuetify'],
    },
    vite: {
-      plugins: [vuetify({ autoImport: true })],
+      plugins: [vuetify({ autoImport: true, styles: { configFile: 'src/styles/settings.scss' } })],
       vue: {
          template: {
             transformAssetUrls,
