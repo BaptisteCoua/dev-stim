@@ -1,5 +1,5 @@
 <template>
-    <v-gradient-card class="pa-3" :class="gradientUsed" >
+    <v-gradient-card class="pa-5" :class="gradientUsed" >
         <v-card-title>{{ title }}</v-card-title>
         <v-card-subtitle>{{ mainInformation }}</v-card-subtitle>
         <v-card-text>{{ additionalInformation }}</v-card-text>
