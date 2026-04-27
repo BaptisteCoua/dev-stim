@@ -1,18 +1,20 @@
 <template>
-   <v-sheet class="row d-flex align-center ga-2 px-3 py-2" :class="`row--${status}`">
-      <v-icon :icon="s.icon" :color="s.color" size="20" />
+   <v-sheet class="ticket-row d-flex align-center ga-2 px-3 py-2" :class="`ticket-row--${status}`">
+      <v-icon :icon="status.icon" :color="status.color" size="20" />
 
-      <v-text class="title text-no-wrap">
+      <v-text class="ticket-row__title text-no-wrap">
          <b>{{ code }}</b> {{ title }}
-         <span v-if="progress !== undefined" class="progress font-weight-bold">
+         <span v-if="progress !== undefined" class="ticket-row__progress font-weight-bold">
             {{ progress }}%
          </span>
       </v-text>
-      <v-text class="status font-weight-semibold text-no-wrap">{{ s.label }}</v-text>
+      <v-text class="ticket-row__status font-weight-semibold text-no-wrap">
+         {{ status.label }}
+      </v-text>
 
       <v-sheet
          v-if="assignee"
-         class="user d-flex align-center ga-2 font-weight-semibold text-no-wrap"
+         class="ticket-row__user d-flex align-center ga-2 font-weight-semibold text-no-wrap"
          color="transparent"
       >
          <v-text>{{ assignee.name }}</v-text>
@@ -23,16 +25,16 @@
 
       <v-sheet
          v-else-if="assignees?.length"
-         class="user d-flex align-center ga-2 font-weight-semibold text-no-wrap"
+         class="ticket-row__user d-flex align-center ga-2 font-weight-semibold text-no-wrap"
          color="transparent"
       >
          <v-text v-if="mainAssignee">{{ mainAssignee.name }}</v-text>
 
-         <v-sheet class="avatars d-flex align-center" color="transparent">
+         <v-sheet class="ticket-row__avatars d-flex align-center" color="transparent">
             <v-avatar
                v-for="user in assignees"
                :key="user.name"
-               :class="{ 'avatar--main': user.main }"
+               :class="{ 'ticket-row__avatar--main': user.main }"
                size="28"
             >
                <v-img :src="user.avatar" cover />
@@ -66,7 +68,7 @@
       todo: ['À faire', 'mdi-clock-outline', colors.todoJira],
    } as const
 
-   const s = computed(() => {
+   const status = computed(() => {
       const [label, icon, color] = statusMap[props.status]
       return { label, icon, color }
    })
@@ -75,61 +77,61 @@
 </script>
 
 <style scoped>
-   .row {
+   .ticket-row {
       min-height: 44px;
       border-radius: 10px;
       color: v-bind('colors.textColor');
    }
 
-   .row--review,
-   .row--done {
+   .ticket-row--review,
+   .ticket-row--done {
       background: v-bind('colors.bgDoneJira');
    }
 
-   .row--in_progress {
+   .ticket-row--in_progress {
       background: v-bind('colors.bgPendingJira');
    }
 
-   .row--todo {
+   .ticket-row--todo {
       background: v-bind('colors.bgTodoJira');
    }
 
-   .title {
+   .ticket-row__title {
       flex: 1;
       font-size: 20px;
       overflow: hidden;
       text-overflow: ellipsis;
    }
 
-   .row--review .status,
-   .row--done .status {
+   .ticket-row--review .ticket-row__status,
+   .ticket-row--done .ticket-row__status {
       color: v-bind('colors.doneJira');
    }
 
-   .row--in_progress .status {
+   .ticket-row--in_progress .ticket-row__status {
       color: v-bind('colors.pendingJira');
    }
 
-   .row--todo .status {
+   .ticket-row--todo .ticket-row__status {
       color: v-bind('colors.todoJira');
    }
 
-   .progress {
+   .ticket-row__progress {
       margin-left: 6px;
       opacity: 0.5;
       font-size: 14px;
    }
 
-   .avatars {
+   .ticket-row__avatars {
       padding-left: 10px;
    }
 
-   .avatars :deep(.v-avatar) {
+   .ticket-row__avatars :deep(.v-avatar) {
       margin-left: -10px;
       border: 2px solid v-bind('colors.white');
    }
 
-   .avatar--main {
+   .ticket-row__avatar--main {
       z-index: 2;
       width: 34px !important;
       height: 34px !important;
