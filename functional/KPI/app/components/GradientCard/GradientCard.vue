@@ -1,10 +1,8 @@
 <template>
-   <v-gradient-card
-      :class="[gradientUsed, additionalInformation !== '' ? 'px-5 pt-5 pb-1' : 'pa-5']"
-   >
-      <v-card-title>{{ title }}</v-card-title>
-      <v-card-subtitle>{{ mainInformation }}</v-card-subtitle>
-      <v-card-text>{{ additionalInformation }}</v-card-text>
+   <v-gradient-card :class="gradientUsed" class="px-5 pt-5 pb-1">
+      <v-card-title class="card--title-height">{{ title }}</v-card-title>
+      <v-card-subtitle class="card--subtitle-height">{{ mainInformation }}</v-card-subtitle>
+      <v-card-text class="card--text-height">{{ additionalInformation }}</v-card-text>
    </v-gradient-card>
 </template>
 

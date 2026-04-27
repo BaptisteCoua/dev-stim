@@ -12,6 +12,7 @@ const meta = {
    },
    argTypes: {
       gradientChosen: {
+         control: 'inline-radio',
          options: ['info', 'success', 'warning'],
       },
    },
@@ -21,20 +22,13 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Info: Story = {
+export const Base: Story = {
    gradientChosen: 'info',
 }
 
-export const Success: Story = {
+export const WithDescription: Story = {
    args: {
-      gradientChosen: 'success',
-   },
-}
-
-export const Warning: Story = {
-   args: {
-      gradientChosen: 'warning',
-      mainInformation: 'Data',
+      gradientChosen: 'info',
       additionalInformation: 'Added info',
    },
 }
