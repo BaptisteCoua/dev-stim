@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-.success-gradient {
+.container--success {
    background-image: linear-gradient(
       -60deg,
       rgba(var(--v-theme-warningYellow)) -10%,
@@ -8,7 +8,7 @@
    ) !important;
 }
 
-.info-gradient {
+.container--info {
    background-image: linear-gradient(
       -60deg,
       rgba(var(--v-theme-info)) -10%,
@@ -16,7 +16,7 @@
    ) !important;
 }
 
-.warning-gradient {
+.container--warning {
    background-image: linear-gradient(
       -60deg,
       rgba(var(--v-theme-warningOrange)) -10%,

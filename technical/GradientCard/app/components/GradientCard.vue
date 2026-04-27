@@ -19,5 +19,5 @@
       { gradientChosen: 'info', additionalInformation: '' },
    )
 
-   const gradientUsed = `${props.gradientChosen}-gradient`
+   const gradientUsed = `container--${props.gradientChosen}`
 </script>
