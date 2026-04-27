@@ -77,7 +77,7 @@ model Story {
 
   storyId String  @unique
   name        String
-  storyPoints Int
+  storyPoints Decimal
   createdAt   DateTime
   priority    String
 }

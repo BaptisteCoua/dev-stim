@@ -2,24 +2,31 @@ import type { Story as PrismaStory } from '~~/prisma/generated/prisma/client'
 import type { PersistedStoryDto, StoryDto } from '~/technical/Story/shared/dto/StoryDto'
 import { Story } from '~/server/story/domain/Story'
 
-export interface JiraIssueFieldsPayload {
+interface IJiraLinkedIssueFields {
+   summary: string
+   priority: { name: string }
+   issuetype?: { name?: string }
+}
+
+interface IJiraLinkedIssue {
+   id: string
+   key: string
+   fields: IJiraLinkedIssueFields
+}
+
+type JiraIssueLink =
+   | { inwardIssue: IJiraLinkedIssue; outwardIssue?: never }
+   | { outwardIssue: IJiraLinkedIssue; inwardIssue?: never }
+
+export interface IJiraIssueFieldsPayload {
    created?: string
-   issuelinks?: Array<{
-      inwardIssue: {
-         id: string
-         key?: string
-         fields: {
-            summary: string
-            priority: { name: string }
-         }
-      }
-   }>
+   issuelinks?: JiraIssueLink[]
 }
 
 export function toDomainStory(data: StoryDto & { id?: string }): Story {
    return Story.create(data)
 }
-// vérifie que story.id existe, si oui ça construit un StoryDto :
+
 export function toPersistedStoryDto(story: Story): PersistedStoryDto & { id: string } {
    if (!story.id) {
       throw new Error('Cannot build toPersistedStoryDto without id')
@@ -31,46 +38,60 @@ export function toPersistedStoryDto(story: Story): PersistedStoryDto & { id: str
    }
 }
 
-// tranforme ce que prima renvoie en :
 export function fromPrismaStory(story: PrismaStory): Story {
    return Story.create({
       id: story.id,
       storyId: story.storyId,
       name: story.name,
-      storyPoints: story.storyPoints,
+      storyPoints: Number(story.storyPoints),
       createdAt: story.createdAt,
       priority: story.priority,
    })
 }
 
 function parseStoryPointsFromSummary(summary: string): number | null {
-   const match = summary.match(/\[(\d+)\s*pts\]/i)
-   return match ? Number(match[1]) : null
+   const match = summary.match(/\[(\d+(?:[.,]\d+)?)\s*pts\]/i)
+   const raw = match?.[1]
+   if (!raw) return null
+   return Number(raw.replace(',', '.'))
 }
 
 function cleanTitle(summary: string): string {
-   return summary.replace(/\[\d+\s*pts\]\s*\|\s*/i, '').trim()
+   return summary.replace(/\[\d+(?:[.,]\d+)?\s*pts\]\s*\|\s*/i, '').trim()
 }
 
-export function fromJiraDetailToDomain(detail: JiraIssueFieldsPayload): Story {
-   const firstLink = detail.issuelinks?.[0]
-   if (!firstLink) throw new Error('Jira payload: issuelinks[0] missing')
+export function fromJiraDetailToDomain(detail: IJiraIssueFieldsPayload): Story | null {
+   const links = detail.issuelinks ?? []
 
-   const storyId = firstLink.inwardIssue.id
-   const summary = firstLink.inwardIssue.fields.summary
+   const linkedIssues: IJiraLinkedIssue[] = []
 
-   const storyPoints = parseStoryPointsFromSummary(summary) ?? 0
-   const name = cleanTitle(summary)
+   for (const link of links) {
+      if ('inwardIssue' in link) {
+         if (link.inwardIssue) linkedIssues.push(link.inwardIssue)
+      } else {
+         if (link.outwardIssue) linkedIssues.push(link.outwardIssue)
+      }
+   }
+
+   const storyIssue = linkedIssues.find((issue) => issue.fields.issuetype?.name === 'Story')
+   if (!storyIssue) return null
 
    const createdAt = detail.created
-   if (!createdAt) {
-      throw new Error('Jira payload: created not found in issue.fields.created')
-   }
+   if (!createdAt) return null
 
-   const priority = firstLink.inwardIssue.fields.priority?.name
-   if (!priority) {
-      throw new Error('Jira payload: priority not found in inwardIssue.fields.priority.name')
-   }
+   const summary = storyIssue.fields.summary
+   const key = storyIssue.key
+   const name = `${key} ${cleanTitle(summary)}`
+   const points = parseStoryPointsFromSummary(summary) ?? 0
 
-   return Story.create({ storyId, name, storyPoints, createdAt, priority })
+   const priority = storyIssue.fields.priority?.name
+   if (!priority) return null
+
+   return Story.create({
+      storyId: storyIssue.id,
+      name,
+      storyPoints: points,
+      createdAt,
+      priority,
+   })
 }
