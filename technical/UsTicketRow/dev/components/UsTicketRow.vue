@@ -76,65 +76,64 @@
    const mainAssignee = computed(() => props.assignees?.find((user) => user.main))
 </script>
 
-<style scoped>
-   .ticket-row {
-      min-height: 44px;
-      border-radius: 10px;
-      color: v-bind('colors.textColor');
-   }
+<style scoped lang="scss">
+.ticket-row {
+   min-height: 44px;
+   border-radius: 10px;
+   color: v-bind('colors.textColor');
 
-   .ticket-row--review,
-   .ticket-row--done {
+   &--review,
+   &--done {
       background: v-bind('colors.bgDoneJira');
+
+      .ticket-row__status {
+         color: v-bind('colors.doneJira');
+      }
    }
 
-   .ticket-row--in_progress {
+   &--in_progress {
       background: v-bind('colors.bgPendingJira');
+
+      .ticket-row__status {
+         color: v-bind('colors.pendingJira');
+      }
    }
 
-   .ticket-row--todo {
+   &--todo {
       background: v-bind('colors.bgTodoJira');
+
+      .ticket-row__status {
+         color: v-bind('colors.todoJira');
+      }
    }
 
-   .ticket-row__title {
+   &__title {
       flex: 1;
       font-size: 20px;
       overflow: hidden;
       text-overflow: ellipsis;
    }
 
-   .ticket-row--review .ticket-row__status,
-   .ticket-row--done .ticket-row__status {
-      color: v-bind('colors.doneJira');
-   }
-
-   .ticket-row--in_progress .ticket-row__status {
-      color: v-bind('colors.pendingJira');
-   }
-
-   .ticket-row--todo .ticket-row__status {
-      color: v-bind('colors.todoJira');
-   }
-
-   .ticket-row__progress {
+   &__progress {
       margin-left: 6px;
       opacity: 0.5;
       font-size: 14px;
    }
 
-   .ticket-row__avatars {
+   &__avatars {
       padding-left: 10px;
+
+      :deep(.v-avatar) {
+         margin-left: -10px;
+         border: 2px solid v-bind('colors.white');
+      }
    }
 
-   .ticket-row__avatars :deep(.v-avatar) {
-      margin-left: -10px;
-      border: 2px solid v-bind('colors.white');
-   }
-
-   .ticket-row__avatar--main {
+   &__avatar--main {
       z-index: 2;
       width: 34px !important;
       height: 34px !important;
       box-shadow: 0 0 0 2px v-bind('colors.doneJira');
    }
+}
 </style>
