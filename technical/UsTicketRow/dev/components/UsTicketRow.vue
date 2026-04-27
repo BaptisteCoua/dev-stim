@@ -1,5 +1,5 @@
 <template>
-   <v-sheet class="ticket-row d-flex align-center ga-2 px-3 py-2" :class="`ticket-row--${status}`">
+   <v-sheet class="ticket-row d-flex align-center ga-2 px-3 py-2" :class="`ticket-row--${props.status}`">
       <v-icon :icon="status.icon" :color="status.color" size="20" />
 
       <v-text class="ticket-row__title text-no-wrap">

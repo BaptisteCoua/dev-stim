@@ -4,6 +4,7 @@ import UsTicketRow from './UsTicketRow.vue'
 const meta = {
    title: 'Components/UsTicketRow',
    component: UsTicketRow,
+   tags: ['autodocs'],
 } satisfies Meta<typeof UsTicketRow>
 
 export default meta
