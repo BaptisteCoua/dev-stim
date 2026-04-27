@@ -19,3 +19,17 @@
 
    const gradientUsed = `container--${props.gradientChosen}`
 </script>
+
+<style scoped lang="scss">
+   .card--title-height {
+      height: 28px;
+   }
+
+   .card--subtitle-height {
+      height: 64px;
+   }
+
+   .card--text-height {
+      height: 24px;
+   }
+</style>
