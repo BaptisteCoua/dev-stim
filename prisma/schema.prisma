@@ -86,22 +86,23 @@ model Status {
   label   String
   ticket  Ticket?
   story   Story?
-  version Version?
   sprint  Sprint?
 }
 
 model Version {
   id String @id @default(uuid())
 
-  status   Status  @relation(fields: [statusId], references: [id])
-  statusId String  @unique
   storys   Story[]
 
+  versionJiraId String  @unique
   name        String
   description String
   releaseDate DateTime
   startDate   DateTime
   progress    DateTime
+  archived    Boolean
+  released    Boolean
+  overdue     Boolean
 }
 
 model Sprint {
