@@ -5,11 +5,10 @@ import { prisma } from '#server/utils/db'
 export class StoryRepository {
    async findAll(): Promise<Story[]> {
       const stories = await prisma.story.findMany()
-
       return stories.map(fromPrismaStory)
    }
 
-   async upsertByStoryId(story: Story): Promise<Story> {
+   async upsertByStoryId(story: Story, userJiraId: string | null): Promise<Story> {
       const payload = story.toDto()
 
       const persisted = await prisma.story.upsert({
@@ -19,9 +18,11 @@ export class StoryRepository {
             storyPoints: story.storyPoints,
             createdAt: story.createdAt,
             priority: story.priority,
+            userJiraId,
          },
          create: {
             ...payload,
+            userJiraId,
          },
       })
 

@@ -2,23 +2,24 @@ import type { Story as PrismaStory } from '~~/prisma/generated/prisma/client'
 import type { PersistedStoryDto, StoryDto } from '~/technical/Story/shared/dto/StoryDto'
 import { Story } from '~/server/story/domain/Story'
 
-interface IJiraLinkedIssueFields {
-   summary: string
-   priority: { name: string }
+interface IJiraIssueFields {
+   summary?: string
+   priority?: { name?: string }
    issuetype?: { name?: string }
+   assignee?: { accountId?: string }
 }
 
 interface IJiraLinkedIssue {
    id: string
    key: string
-   fields: IJiraLinkedIssueFields
+   fields: IJiraIssueFields
 }
 
 type JiraIssueLink =
    | { inwardIssue: IJiraLinkedIssue; outwardIssue?: never }
    | { outwardIssue: IJiraLinkedIssue; inwardIssue?: never }
 
-export interface IJiraIssueFieldsPayload {
+export interface IJiraIssueFieldsPayload extends IJiraIssueFields {
    created?: string
    issuelinks?: JiraIssueLink[]
 }
@@ -60,8 +61,35 @@ function cleanTitle(summary: string): string {
    return summary.replace(/\[\d+(?:[.,]\d+)?\s*pts\]\s*\|\s*/i, '').trim()
 }
 
-export function fromJiraDetailToDomain(detail: IJiraIssueFieldsPayload): Story | null {
-   const links = detail.issuelinks ?? []
+export function fromJiraIssueFieldsToDomain(
+   issueId: string,
+   fields: IJiraIssueFieldsPayload,
+): Story | null {
+   if (fields.issuetype?.name !== 'Story') return null
+
+   const createdAt = fields.created
+   if (!createdAt) return null
+
+   const summary = fields.summary
+   if (!summary) return null
+
+   const priority = fields.priority?.name
+   if (!priority) return null
+
+   const name = cleanTitle(summary)
+   const points = parseStoryPointsFromSummary(summary) ?? 0
+
+   return Story.create({
+      storyId: issueId,
+      name,
+      storyPoints: points,
+      createdAt,
+      priority,
+   })
+}
+
+export function fromJiraLinkedStoryToDomain(fields: IJiraIssueFieldsPayload): Story | null {
+   const links = fields.issuelinks ?? []
 
    const linkedIssues: IJiraLinkedIssue[] = []
 
@@ -76,16 +104,17 @@ export function fromJiraDetailToDomain(detail: IJiraIssueFieldsPayload): Story |
    const storyIssue = linkedIssues.find((issue) => issue.fields.issuetype?.name === 'Story')
    if (!storyIssue) return null
 
-   const createdAt = detail.created
+   const createdAt = fields.created
    if (!createdAt) return null
 
    const summary = storyIssue.fields.summary
-   const key = storyIssue.key
-   const name = `${key} ${cleanTitle(summary)}`
-   const points = parseStoryPointsFromSummary(summary) ?? 0
+   if (!summary) return null
 
    const priority = storyIssue.fields.priority?.name
    if (!priority) return null
+
+   const name = `${storyIssue.key} ${cleanTitle(summary)}`
+   const points = parseStoryPointsFromSummary(summary) ?? 0
 
    return Story.create({
       storyId: storyIssue.id,

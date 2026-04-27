@@ -10,8 +10,6 @@ export default defineEventHandler(async (event) => {
 
    console.log('\x1b[34m%s\x1b[0m', `[webhook] Unhandled event: ${body?.webhookEvent}`)
 
-   /*console.log(JSON.stringify(body))*/
-
    switch (body?.webhookEvent) {
       case 'jira:issue_created':
       case 'jira:issue_updated':

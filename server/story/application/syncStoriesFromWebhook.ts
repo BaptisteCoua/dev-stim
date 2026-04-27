@@ -1,20 +1,31 @@
 import {
-   fromJiraDetailToDomain,
+   fromJiraIssueFieldsToDomain,
+   fromJiraLinkedStoryToDomain,
    type IJiraIssueFieldsPayload,
 } from '~/server/story/interface/storyMapper'
 import { storyRepository } from '~/server/story/infrastruture/storyRepository'
+import { prisma } from '#server/utils/db'
 
 interface IJiraWebhookPayload {
    issue?: {
+      id?: string
       fields?: IJiraIssueFieldsPayload
    }
 }
 
 export async function syncStoriesFromWebhook(body: IJiraWebhookPayload) {
-   const detail = body.issue?.fields
-   if (!detail?.issuelinks?.length) return
+   const issueId = body.issue?.id
+   const fields = body.issue?.fields
+   if (!issueId || !fields) return
 
-   const story = fromJiraDetailToDomain(detail)
+   const story = fromJiraIssueFieldsToDomain(issueId, fields) ?? fromJiraLinkedStoryToDomain(fields)
+
    if (!story) return
-   await storyRepository.upsertByStoryId(story)
+
+   const assigneeAccountId = fields.assignee?.accountId
+   const userJira = assigneeAccountId
+      ? await prisma.userJira.findUnique({ where: { accountId: assigneeAccountId } })
+      : null
+
+   await storyRepository.upsertByStoryId(story, userJira?.id ?? null)
 }
