@@ -13,6 +13,8 @@ services:
          - nuxt_data:/app/.nuxt
       depends_on:
          - postgres
+      env_file:
+         - .env
       environment:
          RUNNING_IN_DOCKER: 'true'
 
