@@ -21,7 +21,3 @@
 
    const gradientUsed = `${props.gradientChosen}-gradient`
 </script>
-
-<style scoped lang="scss">
-   @use '~/technical/Template/assets/scss/main.scss';
-</style>

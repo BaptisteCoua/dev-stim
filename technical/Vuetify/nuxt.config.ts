@@ -12,4 +12,5 @@ export default defineNuxtConfig({
          },
       },
    },
+   css: ['~/technical/Template/assets/scss/main.scss'],
 })

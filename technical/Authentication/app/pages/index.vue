@@ -1,5 +1,4 @@
 <script setup lang="ts">
-   import GradientCard from '~/technical/GradientCard/app/components/GradientCard.vue'
    import type { FetchError } from 'ofetch'
 
    const email = ref<string>('')
@@ -27,7 +26,6 @@
 
 <template>
    <div class="page">
-      <GradientCard title="Titre" main-information="info" additional-information="coucou" />
       <div class="card">
          <h1>Connexion</h1>
          <p class="sub">Accédez à votre espace</p>
