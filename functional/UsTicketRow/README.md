@@ -1,6 +1,6 @@
 # UsTicketRow
 
-Type: technical
+Type: functional
 
 ## Description
 
