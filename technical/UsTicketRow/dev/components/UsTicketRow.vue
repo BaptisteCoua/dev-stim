@@ -1,5 +1,8 @@
 <template>
-   <v-sheet class="ticket-row d-flex align-center ga-2 px-3 py-2" :class="`ticket-row--${props.status}`">
+   <v-sheet
+      class="ticket-row d-flex align-center ga-2 px-3 py-2"
+      :class="`ticket-row--${props.status}`"
+   >
       <v-icon :icon="status.icon" :color="status.color" size="20" />
 
       <v-text class="ticket-row__title text-no-wrap">
@@ -77,63 +80,63 @@
 </script>
 
 <style scoped lang="scss">
-.ticket-row {
-   min-height: 44px;
-   border-radius: 10px;
-   color: v-bind('colors.textColor');
+   .ticket-row {
+      min-height: 44px;
+      border-radius: 10px;
+      color: v-bind('colors.textColor');
 
-   &--review,
-   &--done {
-      background: v-bind('colors.bgDoneJira');
+      &--review,
+      &--done {
+         background: v-bind('colors.bgDoneJira');
 
-      .ticket-row__status {
-         color: v-bind('colors.doneJira');
+         .ticket-row__status {
+            color: v-bind('colors.doneJira');
+         }
+      }
+
+      &--in_progress {
+         background: v-bind('colors.bgPendingJira');
+
+         .ticket-row__status {
+            color: v-bind('colors.pendingJira');
+         }
+      }
+
+      &--todo {
+         background: v-bind('colors.bgTodoJira');
+
+         .ticket-row__status {
+            color: v-bind('colors.todoJira');
+         }
+      }
+
+      &__title {
+         flex: 1;
+         font-size: 20px;
+         overflow: hidden;
+         text-overflow: ellipsis;
+      }
+
+      &__progress {
+         margin-left: 6px;
+         opacity: 0.5;
+         font-size: 14px;
+      }
+
+      &__avatars {
+         padding-left: 10px;
+
+         :deep(.v-avatar) {
+            margin-left: -10px;
+            border: 2px solid v-bind('colors.white');
+         }
+      }
+
+      &__avatar--main {
+         z-index: 2;
+         width: 34px !important;
+         height: 34px !important;
+         box-shadow: 0 0 0 2px v-bind('colors.doneJira');
       }
    }
-
-   &--in_progress {
-      background: v-bind('colors.bgPendingJira');
-
-      .ticket-row__status {
-         color: v-bind('colors.pendingJira');
-      }
-   }
-
-   &--todo {
-      background: v-bind('colors.bgTodoJira');
-
-      .ticket-row__status {
-         color: v-bind('colors.todoJira');
-      }
-   }
-
-   &__title {
-      flex: 1;
-      font-size: 20px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-   }
-
-   &__progress {
-      margin-left: 6px;
-      opacity: 0.5;
-      font-size: 14px;
-   }
-
-   &__avatars {
-      padding-left: 10px;
-
-      :deep(.v-avatar) {
-         margin-left: -10px;
-         border: 2px solid v-bind('colors.white');
-      }
-   }
-
-   &__avatar--main {
-      z-index: 2;
-      width: 34px !important;
-      height: 34px !important;
-      box-shadow: 0 0 0 2px v-bind('colors.doneJira');
-   }
-}
 </style>
