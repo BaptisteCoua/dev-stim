@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
-import GradientCard from '~/technical/GradientCard/app/components/GradientCard.vue'
+import GradientCard from '~/functional/KPI/app/components/GradientCard/GradientCard.vue'
 
 const meta = {
    title: 'Components/GradientCard',

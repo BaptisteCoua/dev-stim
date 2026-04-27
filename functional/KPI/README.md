@@ -1,6 +1,6 @@
-# GradientCard
+# KPI
 
-Type: technical
+Type: functional
 
 ## Description
 
