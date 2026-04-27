@@ -13,7 +13,7 @@ export default defineOSDDNuxtConfig({
          'ECharts',
          'User',
       ],
-      functional: [],
+      functional: ['Version'],
    },
    compatibilityDate: '2025-07-15',
    modules: ['nuxt-auth-utils', '@nuxt/eslint', '@nuxtjs/i18n', 'nuxt-echarts'],
