@@ -75,6 +75,7 @@ model Story {
   sprintId   String?  @unique
   tickets    Ticket[]
 
+  storyId String  @unique
   name        String
   storyPoints Int
   createdAt   DateTime

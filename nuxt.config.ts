@@ -14,7 +14,7 @@ export default defineOSDDNuxtConfig({
          'User',
          ,
          'Story',
-      ],
+      , 'Ticket'],
       functional: [],
    },
    compatibilityDate: '2025-07-15',

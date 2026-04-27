@@ -2,20 +2,18 @@ import type { Story as PrismaStory } from '~~/prisma/generated/prisma/client'
 import type { PersistedStoryDto, StoryDto } from '~/technical/Story/shared/dto/StoryDto'
 import { Story } from '~/server/story/domain/Story'
 
-export interface JiraWebhookStoryPayload {
-   issuelinks: Array<{
-      inwardIssue?: {
-         fields?: {
-            summary?: string
-            priority?: { name: string }
+export interface JiraIssueFieldsPayload {
+   created?: string
+   issuelinks?: Array<{
+      inwardIssue: {
+         id: string
+         key?: string
+         fields: {
+            summary: string
+            priority: { name: string }
          }
       }
    }>
-   issue: {
-      fields?: {
-         created?: string
-      }
-   }
 }
 
 export function toDomainStory(data: StoryDto & { id?: string }): Story {
@@ -37,6 +35,7 @@ export function toPersistedStoryDto(story: Story): PersistedStoryDto & { id: str
 export function fromPrismaStory(story: PrismaStory): Story {
    return Story.create({
       id: story.id,
+      storyId: story.storyId,
       name: story.name,
       storyPoints: story.storyPoints,
       createdAt: story.createdAt,
@@ -53,33 +52,25 @@ function cleanTitle(summary: string): string {
    return summary.replace(/\[\d+\s*pts\]\s*\|\s*/i, '').trim()
 }
 
-export function fromJiraDetailToDomain(detail: JiraWebhookStoryPayload): Story {
+export function fromJiraDetailToDomain(detail: JiraIssueFieldsPayload): Story {
    const firstLink = detail.issuelinks?.[0]
-   const summary = firstLink?.inwardIssue?.fields?.summary
+   if (!firstLink) throw new Error('Jira payload: issuelinks[0] missing')
 
-   if (!summary) {
-      throw new Error('Jira payload: summary not found in issuelinks')
-   }
+   const storyId = firstLink.inwardIssue.id
+   const summary = firstLink.inwardIssue.fields.summary
 
    const storyPoints = parseStoryPointsFromSummary(summary) ?? 0
    const name = cleanTitle(summary)
 
-   const createdAt = detail.issue.fields?.created
+   const createdAt = detail.created
    if (!createdAt) {
       throw new Error('Jira payload: created not found in issue.fields.created')
    }
 
-   const priority = firstLink?.inwardIssue?.fields?.priority?.name
+   const priority = firstLink.inwardIssue.fields.priority?.name
    if (!priority) {
-      throw new Error(
-         'Jira payload: priority not found in issuelinks[0].inwardIssue.fields.priority.name',
-      )
+      throw new Error('Jira payload: priority not found in inwardIssue.fields.priority.name')
    }
 
-   return Story.create({
-      name,
-      storyPoints,
-      createdAt,
-      priority,
-   })
+   return Story.create({ storyId, name, storyPoints, createdAt, priority })
 }
