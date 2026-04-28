@@ -116,8 +116,8 @@ model Sprint {
   name          String
   startDate     DateTime
   endDate       DateTime
-  state         String
-  originBoardId String
+  state         String?
+  originBoardId String?
   createdDate   DateTime
-  completeDate  String
+  completeDate  String?
 }
