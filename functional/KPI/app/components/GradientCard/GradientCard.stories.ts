@@ -23,12 +23,12 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Base: Story = {
-   gradientChosen: 'info',
+   args: {},
 }
 
 export const WithDescription: Story = {
    args: {
-      gradientChosen: 'info',
+      gradientChosen: 'warning',
       additionalInformation: 'Added info',
    },
 }

@@ -1,7 +1,3 @@
-import { VCard } from 'vuetify/components'
-
-const aliases = {
-   VGradientCard: VCard,
-}
+const aliases = {}
 
 export default aliases
