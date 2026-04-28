@@ -6,7 +6,7 @@ interface IJiraIssueFields {
    summary?: string
    priority?: { name?: string }
    issuetype?: { name?: string }
-   assignee?: { accountId?: string }
+   assignee?: { accountId?: string } | null
 }
 
 interface IJiraLinkedIssue {

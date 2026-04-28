@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "Sprint" ALTER COLUMN "state" DROP NOT NULL,
+ALTER COLUMN "originBoardId" DROP NOT NULL,
+ALTER COLUMN "completeDate" DROP NOT NULL;

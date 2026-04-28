@@ -85,11 +85,10 @@ model Story {
 }
 
 model Status {
-  id     String  @id @default(uuid())
-  label  String
-  ticket Ticket?
-  story  Story?
-  sprint Sprint?
+  id      String   @id @default(uuid())
+  label   String
+  ticket  Ticket?
+  story   Story?
 }
 
 model Version {
@@ -110,16 +109,14 @@ model Version {
 
 model Sprint {
   id String @id @default(uuid())
+  storys        Story[]
 
-  status   Status  @relation(fields: [statusId], references: [id])
-  statusId String  @unique
-  storys   Story[]
-
+  sprintJiraId  String  @unique
   name          String
-  startDate     DateTime
-  endDate       DateTime
-  state         String
-  originBoardId String
+  startDate     DateTime?
+  endDate       DateTime?
+  state         String?
+  originBoardId String?
   createdDate   DateTime
-  completeDate  String
+  completeDate  String?
 }

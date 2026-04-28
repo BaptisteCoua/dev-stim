@@ -7,7 +7,7 @@ interface IJiraIssueFields {
    priority?: { name?: string }
    issuetype?: { name?: string }
    customfield_10016?: string
-   assignee?: { accountId?: string }
+   assignee?: { accountId?: string } | null
 }
 
 export interface IJiraIssueFieldsPayload extends IJiraIssueFields {
@@ -37,10 +37,7 @@ export function fromPrismaTicket(ticket: PrismaTicket): Ticket {
       type: ticket.type,
    })
 }
-/**
- * Convertit les champs d'une issue Jira en domaine Ticket.
- * Ne gère que les issues de type Task / Bug (pas les tickets liés).
- */
+
 export function fromJiraIssueFieldsToDomain(
    issueId: string,
    fields: IJiraIssueFieldsPayload,
