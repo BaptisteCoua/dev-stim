@@ -7,7 +7,6 @@ const meta = {
    tags: ['autodocs'],
    args: {
       title: 'Ping Prod',
-      gradientChosen: 'info',
       mainInformation: 'Data',
    },
    argTypes: {
