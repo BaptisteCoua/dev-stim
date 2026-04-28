@@ -1,8 +1,8 @@
 <template>
    <v-app>
-      <WorkingProgress />
+      <NuxtPage />
    </v-app>
 </template>
 <script setup lang="ts">
-   import WorkingProgress from '~/technical/Template/pages/WorkingProgress.vue'
+   // import WorkInProgress from '~/technical/Template/pages/WorikingProgress.vue'
 </script>
