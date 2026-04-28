@@ -36,22 +36,22 @@ model Team {
 }
 
 model UserJira {
-  id        String  @id @default(uuid())
-  team      Team    @relation(fields: [teamId], references: [id])
-  teamId    String  @db.Uuid
+  id        String   @id @default(uuid())
+  team      Team     @relation(fields: [teamId], references: [id])
+  teamId    String   @db.Uuid
   name      String
   email     String
-  accountId String  @unique
+  accountId String   @unique
   avatarUrl String
-  tickets Ticket[]
-  stories Story[]
+  tickets   Ticket[]
+  stories   Story[]
 }
 
 model Ticket {
   id String @id @default(uuid())
 
   userJira   UserJira? @relation(fields: [userJiraId], references: [id])
-  userJiraId String?   @unique
+  userJiraId String?
   status     Status?   @relation(fields: [statusId], references: [id])
   statusId   String?   @unique
   storys     Story[]
@@ -66,16 +66,16 @@ model Story {
   id String @id @default(uuid())
 
   userJira   UserJira? @relation(fields: [userJiraId], references: [id])
-  userJiraId String?   @unique
+  userJiraId String?
   status     Status?   @relation(fields: [statusId], references: [id])
   statusId   String?   @unique
   version    Version?  @relation(fields: [versionId], references: [id])
   versionId  String?   @unique
   sprint     Sprint?   @relation(fields: [sprintId], references: [id])
-  sprintId   String?  @unique
+  sprintId   String?   @unique
   tickets    Ticket[]
 
-  storyId String  @unique
+  storyId     String   @unique
   name        String
   storyPoints Decimal
   createdAt   DateTime

@@ -1,8 +1,8 @@
 <template>
    <v-app>
-      <WorkInProgress />
+      <WorkingProgress />
    </v-app>
 </template>
 <script setup lang="ts">
-   import WorkInProgress from '~/technical/Template/pages/WorikingProgress.vue'
+   import WorkingProgress from '~/technical/Template/pages/WorkingProgress.vue'
 </script>
