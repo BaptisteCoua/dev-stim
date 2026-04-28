@@ -5,5 +5,5 @@
 </template>
 
 <script setup lang="ts">
-   const { data } = await useFetch('/api/userJira')
+   const { data } = await useFetch('/api/ticket')
 </script>
