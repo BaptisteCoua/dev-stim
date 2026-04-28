@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
       case 'jira:version_updated':
       case 'jira:version_deleted':
          console.log('\x1b[34m%s\x1b[0m', `[webhook] DEBUT VERSION ----------------------------`)
-         console.log('\x1b[34m%s\x1b[0m', `[webhook] Version event: ${body}`)
+         console.log('\x1b[34m%s\x1b[0m', `[webhook] Version event: ${JSON.stringify(body)}`)
          console.log('\x1b[34m%s\x1b[0m', `[webhook] FIN VERSION ----------------------------`)
          break
 
@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
       case 'jira:issue_deleted':
          await syncStoriesFromWebhook(body)
          console.log('\x1b[34m%s\x1b[0m', `[webhook] DEBUT TICKET US ----------------------------`)
-         console.log('\x1b[34m%s\x1b[0m', `[webhook] Version event: ${body}`)
+         console.log('\x1b[34m%s\x1b[0m', `[webhook] Version event: ${JSON.stringify(body)}`)
          console.log('\x1b[34m%s\x1b[0m', `[webhook] FIN TICKET US ----------------------------`)
          break
 
