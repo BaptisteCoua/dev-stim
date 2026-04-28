@@ -56,10 +56,12 @@ model Ticket {
   statusId   String?   @unique
   storys     Story[]
 
-  name        String
-  priority    String
-  createdAt   DateTime
-  ticketPoint Int
+  ticketId     String   @unique
+  name         String
+  priority     String
+  createdAt    DateTime
+  ticketPoints Int
+  type         String
 }
 
 model Story {
@@ -83,27 +85,27 @@ model Story {
 }
 
 model Status {
-  id      String   @id @default(uuid())
-  label   String
-  ticket  Ticket?
-  story   Story?
-  sprint  Sprint?
+  id     String  @id @default(uuid())
+  label  String
+  ticket Ticket?
+  story  Story?
+  sprint Sprint?
 }
 
 model Version {
   id String @id @default(uuid())
 
-  storys   Story[]
+  storys Story[]
 
-  versionJiraId String  @unique
-  name        String
-  description String
-  releaseDate DateTime
-  startDate   DateTime
-  progress    DateTime
-  archived    Boolean
-  released    Boolean
-  overdue     Boolean
+  versionJiraId String   @unique
+  name          String
+  description   String
+  releaseDate   DateTime
+  startDate     DateTime
+  progress      DateTime
+  archived      Boolean
+  released      Boolean
+  overdue       Boolean
 }
 
 model Sprint {

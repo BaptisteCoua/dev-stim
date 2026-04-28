@@ -7,6 +7,6 @@ export interface TicketDto {
    type: string
 }
 
-export interface PersistedStoryDto extends TicketDto {
+export interface PersistedTicketDto extends TicketDto {
    id: string
 }
