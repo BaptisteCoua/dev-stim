@@ -1,5 +1,5 @@
 import type { Story as PrismaStory } from '~~/prisma/generated/prisma/client'
-import type { PersistedStoryDto, StoryDto } from '~/technical/Story/shared/dto/StoryDto'
+import type { PersistedStoryDto } from '~/technical/Story/shared/dto/StoryDto'
 import { Story } from '~/server/story/domain/Story'
 
 interface IJiraIssueFields {
@@ -22,10 +22,6 @@ type JiraIssueLink =
 export interface IJiraIssueFieldsPayload extends IJiraIssueFields {
    created?: string
    issuelinks?: JiraIssueLink[]
-}
-
-export function toDomainStory(data: StoryDto & { id?: string }): Story {
-   return Story.create(data)
 }
 
 export function toPersistedStoryDto(story: Story): PersistedStoryDto & { id: string } {
