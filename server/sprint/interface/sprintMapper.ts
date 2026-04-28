@@ -20,7 +20,6 @@ export function toPersistedSprintDto(sprint: Sprint): PersistedSprintDto {
 export function fromPrismaSprint(sprint: PrismaSprint): Sprint {
    return Sprint.create({
       id: sprint.id,
-      statusId: sprint.statusId,
       sprintJiraId: sprint.sprintJiraId,
       name: sprint.name,
       startDate: sprint.startDate,

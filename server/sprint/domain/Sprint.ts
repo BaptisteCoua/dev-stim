@@ -2,44 +2,32 @@ import type { SprintDto } from '~/functional/Sprint/shared/dto/sprintDto'
 
 export class Sprint {
    private constructor(
-      private readonly _statusId: string,
       private readonly _sprintJiraId: string,
       private readonly _name: string,
-      private readonly _startDate: Date,
-      private readonly _endDate: Date,
-      private readonly _state: string,
-      private readonly _originBoardId: string,
+      private readonly _startDate: Date | null,
+      private readonly _endDate: Date | null,
+      private readonly _state: string | null,
+      private readonly _originBoardId: string | null,
       private readonly _createdDate: Date,
-      private readonly _completeDate: string,
+      private readonly _completeDate: string | null,
       private readonly _id?: string,
    ) {}
 
    static create(data: SprintDto & { id?: string }): Sprint {
-      const statusId = data.statusId?.trim()
       const sprintJiraId = data.sprintJiraId?.trim()
       const name = data.name?.trim()
       const startDate = toValidDate(data.startDate)
       const endDate = toValidDate(data.endDate)
-      const state = data.state?.trim()
-      const originBoardId = data.originBoardId?.trim()
+      const state = data.state?.trim() || null
+      const originBoardId = data.originBoardId?.trim() || null
       const createdDate = toValidDate(data.createdDate)
-      const completeDate = data.completeDate?.trim()
+      const completeDate = data.completeDate?.trim() || null
 
-      if (
-         !statusId ||
-         !sprintJiraId ||
-         !name ||
-         !startDate ||
-         !endDate ||
-         !state ||
-         !originBoardId ||
-         !createdDate
-      ) {
+      if (!sprintJiraId || !name || !createdDate) {
          throw new Error('Missing required fields for Sprint')
       }
 
       return new Sprint(
-         statusId,
          sprintJiraId,
          name,
          startDate,
@@ -47,17 +35,13 @@ export class Sprint {
          state,
          originBoardId,
          createdDate,
-         completeDate ?? '',
+         completeDate,
          data.id,
       )
    }
 
    get id(): string | undefined {
       return this._id
-   }
-
-   get statusId(): string {
-      return this._statusId
    }
 
    get sprintJiraId(): string {
@@ -68,19 +52,19 @@ export class Sprint {
       return this._name
    }
 
-   get startDate(): Date {
+   get startDate(): Date | null {
       return this._startDate
    }
 
-   get endDate(): Date {
+   get endDate(): Date | null {
       return this._endDate
    }
 
-   get state(): string {
+   get state(): string | null {
       return this._state
    }
 
-   get originBoardId(): string {
+   get originBoardId(): string | null {
       return this._originBoardId
    }
 
@@ -88,13 +72,12 @@ export class Sprint {
       return this._createdDate
    }
 
-   get completeDate(): string {
+   get completeDate(): string | null {
       return this._completeDate
    }
 
    toDto(): SprintDto {
       return {
-         statusId: this.statusId,
          sprintJiraId: this.sprintJiraId,
          name: this.name,
          startDate: this.startDate,
@@ -107,7 +90,9 @@ export class Sprint {
    }
 }
 
-function toValidDate(value: Date): Date | null {
+function toValidDate(value: Date | null): Date | null {
+   if (!value) return null
+
    const date = value instanceof Date ? value : new Date(value)
 
    return Number.isNaN(date.getTime()) ? null : date

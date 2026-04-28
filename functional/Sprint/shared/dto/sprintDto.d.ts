@@ -1,13 +1,12 @@
 export interface SprintDto {
-   statusId: string
    sprintJiraId: string
    name: string
-   startDate: Date
-   endDate: Date
-   state: string
-   originBoardId: string
+   startDate: Date | null
+   endDate: Date | null
+   state: string | null
+   originBoardId: string | null
    createdDate: Date
-   completeDate: string
+   completeDate: string | null
 }
 
 export interface PersistedSprintDto extends SprintDto {
