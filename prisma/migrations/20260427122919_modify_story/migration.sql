@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Story" ALTER COLUMN "storyPoints" SET DATA TYPE DECIMAL(65,30);
