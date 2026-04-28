@@ -8,4 +8,4 @@ COPY package.json pnpm-lock.yaml ./
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "pnpm install && pnpm prisma generate && pnpm dev --host 0.0.0.0"]
+CMD ["sh", "-c", "pnpm install && rm -rf prisma/generated/prisma && pnpm prisma generate && pnpm dev --host 0.0.0.0"]
