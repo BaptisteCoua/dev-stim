@@ -10,7 +10,6 @@ export default defineEventHandler(async (event) => {
    await syncJiraUsersFromWebhook(body)
 
    console.log('\x1b[34m%s\x1b[0m', `[webhook] Unhandled event: ${body?.webhookEvent}`)
-   console.log('\x1b[34m%s\x1b[0m', `[webhook] Version event: ${JSON.stringify(body)}`)
 
    switch (body?.webhookEvent) {
       case 'jira:version_released':
