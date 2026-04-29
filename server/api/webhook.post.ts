@@ -1,6 +1,7 @@
 import type { JiraIssueWebhookPayload } from '~/server/userJira/interface/userJiraMapper'
 import { syncJiraUsersFromWebhook } from '~/server/userJira/application/syncJiraUsersFromWebhook'
 import { syncStoriesFromWebhook } from '~/server/story/application/syncStoriesFromWebhook'
+import { syncTicketsFromWebhook } from '#server/ticket/application/syncTicketsFromWebhook'
 import { syncSprintsFromWebhook } from '~/server/sprint/application/syncSprintsFromWebhook'
 
 export default defineEventHandler(async (event) => {
@@ -26,6 +27,7 @@ export default defineEventHandler(async (event) => {
       case 'jira:issue_updated':
       case 'jira:issue_deleted':
          await syncStoriesFromWebhook(body)
+         await syncTicketsFromWebhook(body)
          console.log('\x1b[34m%s\x1b[0m', `[webhook] DEBUT TICKET US ----------------------------`)
          console.log('\x1b[34m%s\x1b[0m', `[webhook] Version event: ${JSON.stringify(body)}`)
          console.log('\x1b[34m%s\x1b[0m', `[webhook] FIN TICKET US ----------------------------`)
