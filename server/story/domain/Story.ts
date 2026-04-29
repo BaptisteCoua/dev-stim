@@ -7,6 +7,7 @@ export class Story {
       private readonly _storyPoints: number,
       private readonly _createdAt: Date | string,
       private readonly _priority: string,
+      private readonly _status?: string,
       private readonly _id?: string,
    ) {}
 
@@ -14,6 +15,7 @@ export class Story {
       const storyId = data.storyId?.trim()
       const name = data.name?.trim()
       const priority = data.priority?.trim()
+      const status = data.status?.trim()
 
       const storyPoints = data.storyPoints
       const createdAt = data.createdAt
@@ -21,7 +23,7 @@ export class Story {
       if (!storyId || !name || storyPoints == null || !createdAt || !priority) {
          throw new Error('Missing required fields for Story')
       }
-      return new Story(storyId, name, storyPoints, createdAt, priority, data.id)
+      return new Story(storyId, name, storyPoints, createdAt, priority, status, data.id)
    }
 
    get id(): string | undefined {
@@ -48,6 +50,10 @@ export class Story {
       return this._priority
    }
 
+   get status(): string | undefined {
+      return this._status
+   }
+
    toDto(): StoryDto {
       return {
          storyId: this.storyId,
@@ -55,6 +61,7 @@ export class Story {
          storyPoints: this.storyPoints,
          createdAt: this.createdAt,
          priority: this.priority,
+         status: this.status,
       }
    }
 }

@@ -6,6 +6,7 @@ interface IJiraIssueFields {
    summary?: string
    priority?: { name?: string }
    issuetype?: { name?: string }
+   status?: { name?: string }
    assignee?: { accountId?: string } | null
 }
 
@@ -43,6 +44,7 @@ export function fromPrismaStory(story: PrismaStory): Story {
       storyPoints: Number(story.storyPoints),
       createdAt: story.createdAt,
       priority: story.priority,
+      status: story.status ?? '',
    })
 }
 
@@ -72,6 +74,8 @@ export function fromJiraIssueFieldsToDomain(
    const priority = fields.priority?.name
    if (!priority) return null
 
+   const status = fields.status?.name ?? ''
+
    const name = cleanTitle(summary)
    const points = parseStoryPointsFromSummary(summary) ?? 0
 
@@ -81,6 +85,7 @@ export function fromJiraIssueFieldsToDomain(
       storyPoints: points,
       createdAt,
       priority,
+      status,
    })
 }
 
@@ -109,6 +114,9 @@ export function fromJiraLinkedStoryToDomain(fields: IJiraIssueFieldsPayload): St
    const priority = storyIssue.fields.priority?.name
    if (!priority) return null
 
+   const status = fields.status?.name
+   if (!status) return null
+
    const name = `${storyIssue.key} ${cleanTitle(summary)}`
    const points = parseStoryPointsFromSummary(summary) ?? 0
 
@@ -118,5 +126,6 @@ export function fromJiraLinkedStoryToDomain(fields: IJiraIssueFieldsPayload): St
       storyPoints: points,
       createdAt,
       priority,
+      status,
    })
 }

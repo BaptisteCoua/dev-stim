@@ -5,6 +5,7 @@ import { Ticket } from '~/server/ticket/domain/Ticket'
 interface IJiraIssueFields {
    summary?: string
    priority?: { name?: string }
+   status?: { name?: string }
    issuetype?: { name?: string }
    customfield_10016?: string
    assignee?: { accountId?: string } | null
@@ -34,6 +35,7 @@ export function fromPrismaTicket(ticket: PrismaTicket): Ticket {
       ticketPoints: Number(ticket.ticketPoints),
       createdAt: ticket.createdAt,
       priority: ticket.priority,
+      status: ticket.status,
       type: ticket.type,
    })
 }
@@ -53,6 +55,9 @@ export function fromJiraIssueFieldsToDomain(
    const priority = fields.priority?.name
    if (!priority) return null
 
+   const status = fields.status?.name
+   if (!status) return null
+
    const issueType = fields.issuetype?.name
    if (!issueType) return null
 
@@ -64,6 +69,7 @@ export function fromJiraIssueFieldsToDomain(
       ticketPoints: points,
       createdAt,
       priority,
+      status,
       type: issueType,
    })
 }
