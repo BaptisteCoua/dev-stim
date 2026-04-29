@@ -52,13 +52,12 @@ model Ticket {
 
   userJira   UserJira? @relation(fields: [userJiraId], references: [id])
   userJiraId String?
-  status     Status?   @relation(fields: [statusId], references: [id])
-  statusId   String?   @unique
   storys     Story[]
 
   ticketId     String   @unique
   name         String
   priority     String
+  status       String?
   createdAt    DateTime
   ticketPoints Int
   type         String
@@ -69,8 +68,6 @@ model Story {
 
   userJira   UserJira? @relation(fields: [userJiraId], references: [id])
   userJiraId String?
-  status     Status?   @relation(fields: [statusId], references: [id])
-  statusId   String?   @unique
   version    Version?  @relation(fields: [versionId], references: [id])
   versionId  String?   @unique
   sprint     Sprint?   @relation(fields: [sprintId], references: [id])
@@ -82,13 +79,7 @@ model Story {
   storyPoints Decimal
   createdAt   DateTime
   priority    String
-}
-
-model Status {
-  id     String  @id @default(uuid())
-  label  String
-  ticket Ticket?
-  story  Story?
+  status      String?
 }
 
 model Version {

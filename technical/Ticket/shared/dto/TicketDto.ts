@@ -5,6 +5,7 @@ export interface TicketDto {
    createdAt: string | Date
    priority: string
    type: string
+   status: string | null
 }
 
 export interface PersistedTicketDto extends TicketDto {
