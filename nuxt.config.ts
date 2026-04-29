@@ -2,6 +2,9 @@ import { defineOSDDNuxtConfig } from 'nuxt-osdd'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineOSDDNuxtConfig({
+   runtimeConfig: {
+      productionUrl: process.env.URL_PROD,
+   },
    osdd: {
       technical: [
          'Authentication',

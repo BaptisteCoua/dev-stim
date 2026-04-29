@@ -1,7 +1,8 @@
 import { ProductionHealth } from '~/server/productionHealth/domain/ProductionHealth'
 import { productionHealthRepository } from '~/server/productionHealth/infrastructure/productionHealthRepository'
+const runtimeConfig = useRuntimeConfig()
 
-const PRODUCTION_URL = 'https://hypervision.fr'
+const PRODUCTION_URL = runtimeConfig.productionUrl
 const PRODUCTION_HEALTH_TIMEOUT_MS = 10_000
 
 export async function checkProductionHealth(): Promise<void> {
