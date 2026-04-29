@@ -111,3 +111,14 @@ model Sprint {
   createdDate   DateTime
   completeDate  String?
 }
+
+model ProductionHealth {
+  id         String    @id @default(uuid())
+  ok         Boolean
+  status     Int
+  statusText String
+  durationMs Int
+  createdAt  DateTime  @default(now())
+
+  @@map("production_health")
+}
