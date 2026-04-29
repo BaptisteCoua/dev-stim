@@ -14,7 +14,7 @@
       "prettier": "exec prettier . --write",
       "chromatic": "npx chromatic",
       "studio": "docker compose exec nuxt pnpm prisma studio --port 5555 --browser none",
-      "generate": "docker compose exec nuxt pnpm prisma generate",
+      "generate": "docker compose exec nuxt sh -c 'rm -rf prisma/generated/prisma && pnpm prisma generate'",
       "migrate": "docker compose exec nuxt pnpm prisma migrate deploy",
       "migrate-dev": "docker compose exec nuxt pnpm prisma migrate dev"
    },
@@ -24,6 +24,7 @@
       "@prisma/adapter-pg": "^7.7.0",
       "@prisma/client": "^7.7.0",
       "dotenv": "^17.4.2",
+      "node-cron": "^4.2.1",
       "nuxt-auth-utils": "^0.5.29",
       "nuxt-osdd": "^1.0.5",
       "pg": "^8.20.0",
