@@ -22,6 +22,9 @@ importers:
          dotenv:
             specifier: ^17.4.2
             version: 17.4.2
+         node-cron:
+            specifier: ^4.2.1
+            version: 4.2.1
          nuxt-auth-utils:
             specifier: ^0.5.29
             version: 0.5.29(magicast@0.5.2)
@@ -6978,6 +6981,13 @@ packages:
          {
             integrity: sha512-5m3bsyrjFWE1xf7nz7YXdN4udnVtXK6/Yfgn5qnahL6bCkf2yKt4k3nuTKAtT4r3IG8JNR2ncsIMdZuAzJjHQQ==,
          }
+
+   node-cron@4.2.1:
+      resolution:
+         {
+            integrity: sha512-lgimEHPE/QDgFlywTd8yTR61ptugX3Qer29efeyWw2rv259HtGBNn1vZVmp8lB9uo9wC0t/AT4iGqXxia+CJFg==,
+         }
+      engines: { node: '>=6.0.0' }
 
    node-fetch-native@1.6.7:
       resolution:
@@ -14128,6 +14138,8 @@ snapshots:
          - uploadthing
 
    node-addon-api@7.1.1: {}
+
+   node-cron@4.2.1: {}
 
    node-fetch-native@1.6.7: {}
 
