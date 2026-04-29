@@ -13,13 +13,24 @@ export default defineOSDDNuxtConfig({
          'ECharts',
          'User',
          'Localization',
+         'Story',
          'MainCard',
+         'Ticket',
       ],
       functional: [
          'BaseCarousel',
+         'Version',
       ],
    },
    compatibilityDate: '2025-07-15',
    modules: ['nuxt-auth-utils', '@nuxt/eslint', '@nuxtjs/i18n', 'nuxt-echarts'],
+   nitro: {
+      externals: {
+         external: ['node-cron'],
+      },
+      rollupConfig: {
+         external: ['node-cron'],
+      },
+   },
    devtools: { enabled: true },
 })
