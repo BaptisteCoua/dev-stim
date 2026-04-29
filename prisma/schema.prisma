@@ -85,10 +85,10 @@ model Story {
 }
 
 model Status {
-  id      String   @id @default(uuid())
-  label   String
-  ticket  Ticket?
-  story   Story?
+  id     String  @id @default(uuid())
+  label  String
+  ticket Ticket?
+  story  Story?
 }
 
 model Version {
@@ -108,10 +108,10 @@ model Version {
 }
 
 model Sprint {
-  id String @id @default(uuid())
-  storys        Story[]
+  id     String  @id @default(uuid())
+  storys Story[]
 
-  sprintJiraId  String  @unique
+  sprintJiraId  String    @unique
   name          String
   startDate     DateTime?
   endDate       DateTime?
@@ -119,4 +119,15 @@ model Sprint {
   originBoardId String?
   createdDate   DateTime
   completeDate  String?
+}
+
+model ProductionHealth {
+  id         String    @id @default(uuid())
+  ok         Boolean
+  status     Int
+  statusText String
+  durationMs Int
+  createdAt  DateTime  @default(now())
+
+  @@map("production_health")
 }
