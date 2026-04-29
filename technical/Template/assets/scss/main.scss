@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+.container--success {
+   background-image: linear-gradient(
+      -60deg,
+      rgba(var(--v-theme-warningYellow)) -10%,
+      rgba(var(--v-theme-success)) 80%
+   ) !important;
+}
+
+.container--info {
+   background-image: linear-gradient(
+      -60deg,
+      rgba(var(--v-theme-info)) -10%,
+      rgba(var(--v-theme-bgBlue)) 80%
+   ) !important;
+}
+
+.container--warning {
+   background-image: linear-gradient(
+      -60deg,
+      rgba(var(--v-theme-warningOrange)) -10%,
+      rgba(var(--v-theme-warningYellow)) 80%
+   ) !important;
+}
