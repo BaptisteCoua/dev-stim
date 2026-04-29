@@ -17,7 +17,7 @@ export default defineOSDDNuxtConfig({
          'MainCard',
          'Ticket',
       ],
-      functional: ['Version'],
+      functional: ['KPI', 'Version'],
    },
    compatibilityDate: '2025-07-15',
    modules: ['nuxt-auth-utils', '@nuxt/eslint', '@nuxtjs/i18n', 'nuxt-echarts'],
