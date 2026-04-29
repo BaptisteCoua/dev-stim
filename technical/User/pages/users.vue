@@ -1,6 +1,6 @@
 <template>
    <div>
-      <v-data-table :items="data" hide-default-footer> </v-data-table>
+      <v-data-table :items="data" />
    </div>
 </template>
 
