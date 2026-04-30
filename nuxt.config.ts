@@ -20,7 +20,7 @@ export default defineOSDDNuxtConfig({
          'MainCard',
          'Ticket',
       ],
-      functional: ['KPI', 'UsTicketRow', 'Version'],
+      functional: ['KPI', 'UsTicketRow', 'Version', 'BaseCarousel'],
    },
    compatibilityDate: '2025-07-15',
    modules: ['nuxt-auth-utils', '@nuxt/eslint', '@nuxtjs/i18n', 'nuxt-echarts'],
