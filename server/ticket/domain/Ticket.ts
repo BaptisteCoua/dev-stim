@@ -7,6 +7,7 @@ export class Ticket {
       private readonly _ticketPoints: number,
       private readonly _createdAt: Date | string,
       private readonly _priority: string,
+      private readonly _status: string,
       private readonly _type: string,
       private readonly _id?: string,
    ) {}
@@ -15,15 +16,24 @@ export class Ticket {
       const ticketId = data.ticketId?.trim()
       const name = data.name?.trim()
       const priority = data.priority?.trim()
+      const status = data.status?.trim()
       const type = data.type?.trim()
 
       const ticketPoints = data.ticketPoints
       const createdAt = data.createdAt
 
-      if (!ticketId || !name || ticketPoints == null || !createdAt || !priority || !type) {
+      if (
+         !ticketId ||
+         !name ||
+         ticketPoints == null ||
+         !createdAt ||
+         !priority ||
+         !type ||
+         !status
+      ) {
          throw new Error('Missing required fields for Story')
       }
-      return new Ticket(ticketId, name, ticketPoints, createdAt, priority, type, data.id)
+      return new Ticket(ticketId, name, ticketPoints, createdAt, priority, status, type, data.id)
    }
 
    get id(): string | undefined {
@@ -50,6 +60,10 @@ export class Ticket {
       return this._priority
    }
 
+   get status(): string {
+      return this._status
+   }
+
    get type(): string {
       return this._type
    }
@@ -61,6 +75,7 @@ export class Ticket {
          ticketPoints: this.ticketPoints,
          createdAt: this.createdAt,
          priority: this.priority,
+         status: this.status,
          type: this.type,
       }
    }
