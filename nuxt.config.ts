@@ -18,6 +18,7 @@ export default defineOSDDNuxtConfig({
          'Localization',
          'Story',
          'MainCard',
+         'TeamStatRow',
          'Ticket',
       ],
       functional: ['KPI', 'UsTicketRow', 'Version'],

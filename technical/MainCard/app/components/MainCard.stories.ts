@@ -1,5 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/vue3-vite'
 import MainCard from '~/technical/MainCard/app/components/MainCard.vue'
+import TeamStatRow from '~/technical/TeamStatRow/app/components/TeamStatRow.vue'
+
+const slotVariants = {
+   empty: null,
+   teamStatRows: markRaw({
+      components: { TeamStatRow },
+      template: `
+      <TeamStatRow label="Assigné" value=11 trend="down" color="error" />
+      <TeamStatRow label="Complétés" labelPercentage=95 value=52 trend="up" color="success" />
+      <TeamStatRow label="Bugs" value=4 trend="up" color="warning" />
+      <TeamStatRow label="MEP version" value="2.11.0" color="info" />
+      <TeamStatRow label="Progression" variant="progress" :value=65 color="success" />
+    `,
+   }),
+}
 
 const meta = {
    title: 'Components/MainCard',
@@ -15,6 +30,17 @@ const meta = {
       total: {
          control: 'number',
       },
+      default: {
+         options: Object.keys(slotVariants),
+         mapping: slotVariants,
+         control: {
+            type: 'select',
+            labels: {
+               empty: '— empty —',
+               teamStatRows: 'TeamStatRows',
+            },
+         },
+      },
    },
    render: (args) => ({
       components: { MainCard },
@@ -23,7 +49,10 @@ const meta = {
       },
       template: `
         <MainCard v-bind="args">
-            <p>Contenu de la card</p>
+            <template v-if="typeof args.default === 'string'">
+               {{ args.default }}
+            </template>
+            <component v-else-if="args.default" :is="args.default" />
         </MainCard>
         `,
    }),
