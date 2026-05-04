@@ -36,86 +36,89 @@ model Team {
 }
 
 model UserJira {
-  id        String  @id @default(uuid())
-  team      Team    @relation(fields: [teamId], references: [id])
-  teamId    String  @db.Uuid
+  id        String   @id @default(uuid())
+  team      Team     @relation(fields: [teamId], references: [id])
+  teamId    String   @db.Uuid
   name      String
   email     String
-  accountId String  @unique
+  accountId String   @unique
   avatarUrl String
-  ticket    Ticket?
-  story     Story?
+  tickets   Ticket[]
+  stories   Story[]
 }
 
 model Ticket {
   id String @id @default(uuid())
 
-  userJira   UserJira @relation(fields: [userJiraId], references: [id])
-  userJiraId String   @unique
-  status     Status   @relation(fields: [statusId], references: [id])
-  statusId   String   @unique
+  userJira   UserJira? @relation(fields: [userJiraId], references: [id])
+  userJiraId String?
   storys     Story[]
 
-  name        String
-  priority    String
-  createdAt   DateTime
-  ticketPoint Int
+  ticketId     String   @unique
+  name         String
+  priority     String
+  status       String?
+  createdAt    DateTime
+  ticketPoints Int
+  type         String
 }
 
 model Story {
   id String @id @default(uuid())
 
-  userJira   UserJira @relation(fields: [userJiraId], references: [id])
-  userJiraId String   @unique
-  status     Status   @relation(fields: [statusId], references: [id])
-  statusId   String   @unique
-  version    Version  @relation(fields: [versionId], references: [id])
-  versionId  String   @unique
-  sprint     Sprint   @relation(fields: [sprintId], references: [id])
-  sprintId   String   @unique
+  userJira   UserJira? @relation(fields: [userJiraId], references: [id])
+  userJiraId String?
+  version    Version?  @relation(fields: [versionId], references: [id])
+  versionId  String?   @unique
+  sprint     Sprint?   @relation(fields: [sprintId], references: [id])
+  sprintId   String?   @unique
   tickets    Ticket[]
 
+  storyId     String   @unique
   name        String
-  storyPoints Int
+  storyPoints Decimal
   createdAt   DateTime
   priority    String
-}
-
-model Status {
-  id      String   @id @default(uuid())
-  label   String
-  ticket  Ticket?
-  story   Story?
-  version Version?
-  sprint  Sprint?
+  status      String?
 }
 
 model Version {
   id String @id @default(uuid())
 
-  status   Status  @relation(fields: [statusId], references: [id])
-  statusId String  @unique
-  storys   Story[]
+  storys Story[]
 
-  name        String
-  description String
-  releaseDate DateTime
-  startDate   DateTime
-  progress    DateTime
+  versionJiraId String   @unique
+  name          String
+  description   String
+  releaseDate   DateTime
+  startDate     DateTime
+  progress      DateTime
+  archived      Boolean
+  released      Boolean
+  overdue       Boolean
 }
 
 model Sprint {
-  id String @id @default(uuid())
+  id     String  @id @default(uuid())
+  storys Story[]
 
-  status   Status  @relation(fields: [statusId], references: [id])
-  statusId String  @unique
-  storys   Story[]
-
+  sprintJiraId  String    @unique
   name          String
-  startDate     DateTime
-  endDate       DateTime
-  state         String
-  originBoardId String
+  startDate     DateTime?
+  endDate       DateTime?
+  state         String?
+  originBoardId String?
   createdDate   DateTime
-  completeDate  String
+  completeDate  String?
+}
+
+model ProductionHealth {
+  id         String    @id @default(uuid())
+  ok         Boolean
+  status     Int
+  statusText String
+  durationMs Int
+  createdAt  DateTime  @default(now())
+
+  @@map("production_health")
 }
