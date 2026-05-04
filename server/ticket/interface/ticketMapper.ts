@@ -9,11 +9,42 @@ interface IJiraIssueFields {
    issuetype?: { name?: string }
    customfield_10016?: string
    assignee?: { accountId?: string } | null
+   issuelinks?: Array<{
+      type?: { inward?: string; outward?: string }
+      outwardIssue?: {
+         key?: string
+         id?: string
+         fields?: {
+            issuetype?: { name?: string }
+         }
+      }
+      inwardIssue?: {
+         key?: string
+         id?: string
+         fields?: {
+            issuetype?: { name?: string }
+         }
+      }
+   }>
 }
 
 export interface IJiraIssueFieldsPayload extends IJiraIssueFields {
    created?: string
    issuetype?: { name?: string }
+}
+
+export function extractStoryJiraIdFromIssueLinks(fields: IJiraIssueFieldsPayload): string | null {
+   const links = fields.issuelinks ?? []
+
+   for (const link of links) {
+      const outwardType = link.outwardIssue?.fields?.issuetype?.name
+      if (outwardType === 'Story' && link.outwardIssue?.id) return link.outwardIssue.id
+
+      const inwardType = link.inwardIssue?.fields?.issuetype?.name
+      if (inwardType === 'Story' && link.inwardIssue?.id) return link.inwardIssue.id
+   }
+
+   return null
 }
 
 export function toPersistedTicketDto(ticket: Ticket): PersistedTicketDto & { id: string } {
@@ -61,7 +92,8 @@ export function fromJiraIssueFieldsToDomain(
    const issueType = fields.issuetype?.name
    if (!issueType) return null
 
-   const points = Number(fields.customfield_10016)
+   const pointsRaw = Number(fields.customfield_10016)
+   const points = Number.isFinite(pointsRaw) ? pointsRaw : 0
 
    return Ticket.create({
       ticketId: issueId,
