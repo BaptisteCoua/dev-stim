@@ -31,6 +31,9 @@ export default defineOSDDNuxtConfig({
       rollupConfig: {
          external: ['node-cron'],
       },
+      experimental: {
+         websocket: true,
+      },
    },
    devtools: { enabled: true },
 })
