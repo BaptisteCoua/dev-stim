@@ -2,7 +2,7 @@
    <v-card
       class="px-5 pt-5 pb-1 text-textColor rounded-lg d-flex align-center"
       width="300px"
-      :class="gradientUsed"
+      :class="GRADIENTUSED"
    >
       <div>
          <v-card-title
@@ -29,8 +29,6 @@
 </template>
 
 <script setup lang="ts">
-   import PieChart from '~/functional/KPI/app/components/PieChart/PieChart.vue'
-
    const props = withDefaults(
       defineProps<{
          gradientChosen?: string | null
@@ -43,7 +41,7 @@
       { gradientChosen: 'info', additionalInformation: '' },
    )
 
-   const gradientUsed = props.gradientChosen ? `container--${props.gradientChosen}` : ''
+   const GRADIENTUSED = props.gradientChosen ? `container--${props.gradientChosen}` : ''
 </script>
 
 <style scoped lang="scss">

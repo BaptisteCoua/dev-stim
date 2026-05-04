@@ -1,10 +1,10 @@
 <template>
    <div class="d-flex flex-wrap justify-center align-center pie-chart-appearance">
-      <v-chart :option="option" autoresize> </v-chart>
+      <v-chart :option="option" autoresize />
       <div
          class="position-absolute w-100 d-flex flex-column align-center justify-center text-center chart-overlay text-textColor font-weight-bold text-title-large"
       >
-         {{ PERCENTAGE }}
+         {{ percentage }}
       </div>
    </div>
 </template>
@@ -15,7 +15,7 @@
       totalUs: number
    }>()
 
-   const PERCENTAGE = computed(() => {
+   const percentage = computed(() => {
       const response = (props.numberUsDone / props.totalUs) * 100
       return `${Math.trunc(response)}%`
    })
