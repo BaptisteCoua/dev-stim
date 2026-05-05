@@ -31,3 +31,12 @@ export const WithDescription: Story = {
       additionalInformation: 'Added info',
    },
 }
+
+export const WithPieChart: Story = {
+   args: {
+      gradientChosen: 'warning',
+      additionalInformation: 'Added info',
+      numberUsDone: 29,
+      totalUs: 52,
+   },
+}
