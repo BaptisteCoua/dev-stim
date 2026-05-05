@@ -2,7 +2,7 @@
    <v-card
       class="px-5 pt-5 pb-1 text-textColor rounded-lg d-flex align-center"
       width="300px"
-      :class="GRADIENTUSED"
+      :class="gradientUsed"
    >
       <div>
          <v-card-title
@@ -41,7 +41,9 @@
       { gradientChosen: 'info', additionalInformation: '' },
    )
 
-   const GRADIENTUSED = props.gradientChosen ? `container--${props.gradientChosen}` : ''
+   const gradientUsed = ref<string>(
+      props.gradientChosen ? `container--${props.gradientChosen}` : '',
+   )
 </script>
 
 <style scoped lang="scss">
