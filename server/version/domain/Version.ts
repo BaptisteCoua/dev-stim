@@ -17,11 +17,11 @@ export class Version {
       const startDate = toValidDate(data.startDate)
       const progress = toValidDate(data.progress)
 
-      if ( !name || !description || !releaseDate || !startDate || !progress) {
+      if (!name || !description || !releaseDate || !startDate || !progress) {
          throw new Error('Missing required fields for Version')
       }
 
-      return new Version( name, description, releaseDate, startDate, progress, data.id)
+      return new Version(name, description, releaseDate, startDate, progress, data.id)
    }
 
    get id(): string | undefined {
