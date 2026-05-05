@@ -8,8 +8,27 @@ export class StoryRepository {
       return stories.map(fromPrismaStory)
    }
 
-   async upsertByStoryId(story: Story, userJiraId: string | null): Promise<Story> {
+   async upsertByStoryId(
+      story: Story,
+      userJiraId: string | null,
+      sprintJiraId?: string,
+      versionJiraId?: string,
+   ): Promise<Story> {
       const payload = story.toDto()
+
+      const existingSprint = sprintJiraId
+         ? await prisma.sprint.findUnique({
+              where: { sprintJiraId },
+              select: { id: true },
+           })
+         : null
+
+      const existingVersion = versionJiraId
+         ? await prisma.version.findUnique({
+              where: { versionJiraId },
+              select: { id: true },
+           })
+         : null
 
       const persisted = await prisma.story.upsert({
          where: { storyId: story.storyId },
@@ -19,10 +38,14 @@ export class StoryRepository {
             createdAt: story.createdAt,
             priority: story.priority,
             userJiraId,
+            ...(existingSprint ? { sprintId: existingSprint.id } : {}),
+            ...(existingVersion ? { versionId: existingVersion.id } : {}),
          },
          create: {
             ...payload,
             userJiraId,
+            ...(existingSprint ? { sprintId: existingSprint.id } : {}),
+            ...(existingVersion ? { versionId: existingVersion.id } : {}),
          },
       })
 

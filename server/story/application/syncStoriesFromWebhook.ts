@@ -1,4 +1,6 @@
 import {
+   extractSprintJiraId,
+   extractVersionJiraId,
    fromJiraIssueFieldsToDomain,
    fromJiraLinkedStoryToDomain,
    type IJiraIssueFieldsPayload,
@@ -27,5 +29,13 @@ export async function syncStoriesFromWebhook(body: IJiraWebhookPayload) {
       ? await prisma.userJira.findUnique({ where: { accountId: assigneeAccountId } })
       : null
 
-   await storyRepository.upsertByStoryId(story, userJira?.id ?? null)
+   const sprintJiraId = extractSprintJiraId(fields)
+   const versionJiraId = extractVersionJiraId(fields)
+
+   await storyRepository.upsertByStoryId(
+      story,
+      userJira?.id ?? null,
+      sprintJiraId ?? undefined,
+      versionJiraId ?? undefined,
+   )
 }
