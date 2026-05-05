@@ -48,7 +48,7 @@
 
 <style>
    .pie-chart-appearance {
-      height: 120px;
-      width: 120px;
+      height: 116px;
+      width: 116px;
    }
 </style>
