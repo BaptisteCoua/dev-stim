@@ -23,6 +23,9 @@ type JiraIssueLink =
 export interface IJiraIssueFieldsPayload extends IJiraIssueFields {
    created?: string
    issuelinks?: JiraIssueLink[]
+   sprint?: { id?: string; name?: string } | null
+   fixVersions?: Array<{ id?: string; name?: string }>
+   versions?: Array<{ id?: string; name?: string }>
 }
 
 export function toPersistedStoryDto(story: Story): PersistedStoryDto & { id: string } {
@@ -34,6 +37,15 @@ export function toPersistedStoryDto(story: Story): PersistedStoryDto & { id: str
       id: story.id,
       ...story.toDto(),
    }
+}
+
+export function extractSprintJiraId(fields: IJiraIssueFieldsPayload): string | null {
+   return fields.sprint?.id ?? null
+}
+
+export function extractVersionJiraId(fields: IJiraIssueFieldsPayload): string | null {
+   const version = fields.fixVersions?.[0] ?? fields.versions?.[0]
+   return version?.id ?? null
 }
 
 export function fromPrismaStory(story: PrismaStory): Story {

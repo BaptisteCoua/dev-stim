@@ -69,9 +69,9 @@ model Story {
   userJira   UserJira? @relation(fields: [userJiraId], references: [id])
   userJiraId String?
   version    Version?  @relation(fields: [versionId], references: [id])
-  versionId  String?   @unique
+  versionId  String?
   sprint     Sprint?   @relation(fields: [sprintId], references: [id])
-  sprintId   String?   @unique
+  sprintId   String?
   tickets    Ticket[]
 
   storyId     String   @unique
@@ -113,12 +113,12 @@ model Sprint {
 }
 
 model ProductionHealth {
-  id         String    @id @default(uuid())
+  id         String   @id @default(uuid())
   ok         Boolean
   status     Int
   statusText String
   durationMs Int
-  createdAt  DateTime  @default(now())
+  createdAt  DateTime @default(now())
 
   @@map("production_health")
 }

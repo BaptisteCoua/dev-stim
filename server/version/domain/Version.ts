@@ -2,7 +2,6 @@ import type { VersionDto } from '~/functional/Version/shared/dto/versionDto'
 
 export class Version {
    private constructor(
-      private readonly _statusId: string,
       private readonly _name: string,
       private readonly _description: string,
       private readonly _releaseDate: Date,
@@ -12,26 +11,21 @@ export class Version {
    ) {}
 
    static create(data: VersionDto & { id?: string }): Version {
-      const statusId = data.statusId?.trim()
       const name = data.name?.trim()
       const description = data.description?.trim()
       const releaseDate = toValidDate(data.releaseDate)
       const startDate = toValidDate(data.startDate)
       const progress = toValidDate(data.progress)
 
-      if (!statusId || !name || !description || !releaseDate || !startDate || !progress) {
+      if (!name || !description || !releaseDate || !startDate || !progress) {
          throw new Error('Missing required fields for Version')
       }
 
-      return new Version(statusId, name, description, releaseDate, startDate, progress, data.id)
+      return new Version(name, description, releaseDate, startDate, progress, data.id)
    }
 
    get id(): string | undefined {
       return this._id
-   }
-
-   get statusId(): string {
-      return this._statusId
    }
 
    get name(): string {
@@ -56,7 +50,6 @@ export class Version {
 
    toDto(): VersionDto {
       return {
-         statusId: this.statusId,
          name: this.name,
          description: this.description,
          releaseDate: this.releaseDate,

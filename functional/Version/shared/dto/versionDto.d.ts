@@ -1,5 +1,4 @@
 export interface VersionDto {
-   statusId: string
    name: string
    description: string
    releaseDate: Date

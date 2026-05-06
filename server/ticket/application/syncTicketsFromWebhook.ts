@@ -1,4 +1,5 @@
 import {
+   extractStoryJiraIdFromIssueLinks,
    fromJiraIssueFieldsToDomain,
    type IJiraIssueFieldsPayload,
 } from '~/server/ticket/interface/ticketMapper'
@@ -8,6 +9,7 @@ import { prisma } from '#server/utils/db'
 interface IJiraWebhookPayload {
    issue?: {
       id?: string
+      key?: string
       fields?: IJiraIssueFieldsPayload
    }
 }
@@ -19,6 +21,8 @@ export async function syncTicketsFromWebhook(body: IJiraWebhookPayload) {
 
    const ticket = fromJiraIssueFieldsToDomain(issueId, fields)
 
+   const storyJiraId = extractStoryJiraIdFromIssueLinks(fields)
+
    if (!ticket) return
 
    const assigneeAccountId = fields.assignee?.accountId
@@ -26,5 +30,5 @@ export async function syncTicketsFromWebhook(body: IJiraWebhookPayload) {
       ? await prisma.userJira.findUnique({ where: { accountId: assigneeAccountId } })
       : null
 
-   await ticketRepository.upsertByTicketId(ticket, userJira?.id ?? null)
+   await ticketRepository.upsertByTicketId(ticket, userJira?.id ?? null, storyJiraId ?? undefined)
 }

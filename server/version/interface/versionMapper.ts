@@ -20,7 +20,6 @@ export function toPersistedVersionDto(version: Version): PersistedVersionDto {
 export function fromPrismaVersion(version: PrismaVersion): Version {
    return Version.create({
       id: version.id,
-      statusId: version.statusId,
       name: version.name,
       description: version.description,
       releaseDate: version.releaseDate,
